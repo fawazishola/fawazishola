@@ -21,7 +21,7 @@ Current LLMs hallucinate ~15-20% of the time. Alexthia + Flux/Tenet aims for <1%
 
 **Core thesis:** Architecture beats scale. A 7B model with verification can outperform 70B models without it.
 
-## 🛠️ Current Projects
+##  Current Projects
 
 ### Tenet - Game theory programming language
 → First language to treat Nash equilibria as first-class citizens  
@@ -47,6 +47,6 @@ Current LLMs hallucinate ~15-20% of the time. Alexthia + Flux/Tenet aims for <1%
 - OS design for mathematical computing
 
 ## Fun Fact
-I don't just 'read'—I've engineered a psychological trigger for deep work. I use a dedicated iPod Shuffle and wired headphones as a hardware key to unlock flow state. By exclusively blasting the Interstellar theme through that specific analog setup, I'm Pavlov-ing my brain into hyper-focus the second the music starts. It's not a playlist; it's an override command for my attention span.
+I don't just 'read', I've engineered a psychological trigger for deep work. I use a dedicated iPod Shuffle and wired headphones as a hardware key to unlock flow state. By exclusively blasting the Interstellar theme through that specific analog setup, I'm Pavlov-ing my brain into hyper-focus the second the music starts. It's not a playlist; it's an override command for my attention span.
 
 > *"Show me the equilibrium, and I'll show you the truth."*
