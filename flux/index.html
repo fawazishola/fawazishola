@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux — A Mathematical Programming Language</title>
+    <meta name="description"
+        content="Flux is a high-performance mathematical scripting language where code looks exactly like math written on paper.">
+
+    <!-- LaTeX.css for academic styling -->
+    <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+
+    <!-- MathJax for rendering mathematical notation in docs -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Prism for syntax highlighting -->
+    <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
+    <style>
+        /* Custom Flux code highlighting */
+        .language-flux {
+            background: #fafafa;
+            border-left: 3px solid #2563eb;
+            font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+        }
+
+        .latex-dark .language-flux {
+            background: #1e1e1e;
+            border-left-color: #60a5fa;
+        }
+
+        /* Unicode operator highlighting */
+        .flux-unicode {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .latex-dark .flux-unicode {
+            color: #93c5fd;
+        }
+
+        /* Feature cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            border: 1px solid #e5e5e5;
+            padding: 1.5rem;
+            border-radius: 4px;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+        }
+
+        .latex-dark .feature-card {
+            border-color: #404040;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+
+        .latex-dark .feature-card h4 {
+            color: #93c5fd;
+        }
+
+        /* Comparison table styling */
+        .comparison-table {
+            font-size: 0.9rem;
+        }
+
+        .comparison-table code {
+            background: #f3f4f6;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        .latex-dark .comparison-table code {
+            background: #374151;
+        }
+
+        /* Paper-like math examples */
+        .paper-example {
+            background: #fff8e1;
+            border: 1px solid #ffd54f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Latin Modern', 'Times New Roman', serif;
+            font-size: 1.1rem;
+        }
+
+        .latex-dark .paper-example {
+            background: #3d3d00;
+            border-color: #ffd54f;
+        }
+
+        /* Roadmap styling */
+        .roadmap-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 4px;
+        }
+
+        .latex-dark .roadmap-item {
+            background: #1e293b;
+        }
+
+        .roadmap-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-done {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-wip {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-planned {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .latex-dark .status-done {
+            background: #166534;
+            color: #dcfce7;
+        }
+
+        .latex-dark .status-wip {
+            background: #92400e;
+            color: #fef3c7;
+        }
+
+        .latex-dark .status-planned {
+            background: #3730a3;
+            color: #e0e7ff;
+        }
+
+        /* Navigation improvements */
+        nav ul {
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                columns: 1;
+            }
+        }
+
+        /* Hero section */
+        .hero-tagline {
+            font-size: 1.3rem;
+            color: #4b5563;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .latex-dark .hero-tagline {
+            color: #9ca3af;
+        }
+
+        /* Definition/theorem custom styling for Flux */
+        .flux-definition {
+            border-left: 4px solid #2563eb;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .flux-example {
+            border-left: 4px solid #10b981;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Header styling */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Toggle button */
+        #dark-mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: inherit;
+            z-index: 1000;
+        }
+
+        .latex-dark #dark-mode-toggle {
+            background: #1e1e1e;
+            border-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="latex-dark-auto">
+    <button id="dark-mode-toggle">☀️ / 🌙</button>
+
+    <article>
+        <header>
+            <h1>Flux</h1>
+            <p class="author">
+                The Axiom Stack<br>
+                <time datetime="2025-12-25">December 2025</time>
+            </p>
+            <p class="hero-tagline">Math as it should be written on paper.</p>
+        </header>
+
+        <div class="abstract">
+            <h2>Abstract</h2>
+            <p>
+                <strong>Flux</strong> is a high-performance mathematical scripting language designed for engineers,
+                scientists, and mathematicians. Unlike traditional programming languages, Flux code looks exactly
+                like handwritten mathematical notation—using Unicode operators like <code>·</code> for multiplication,
+                <code>×</code> for cross products, and superscript digits like <code>²</code> for exponents.
+                Flux treats vectors, matrices, and complex numbers as first-class citizens, enabling natural
+                expression of linear algebra, calculus, and numerical methods. Built on a custom bytecode VM
+                (<code>clox</code>-based), Flux prioritizes mathematical clarity without sacrificing performance.
+            </p>
+        </div>
+
+        <nav role="navigation">
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="#philosophy">1. Design Philosophy</a></li>
+                <li><a href="#getting-started">2. Getting Started</a></li>
+                <li><a href="#paper-syntax">3. Paper-Like Syntax</a></li>
+                <li><a href="#type-system">4. Type System</a></li>
+                <li><a href="#operators">5. Operators</a></li>
+                <li><a href="#linear-algebra">6. Linear Algebra</a></li>
+                <li><a href="#complex-numbers">7. Complex Numbers</a></li>
+                <li><a href="#calculus">8. Numerical Calculus</a></li>
+                <li><a href="#functions">9. Functions</a></li>
+                <li><a href="#control-flow">10. Control Flow</a></li>
+                <li><a href="#std-lib">11. Standard Library</a></li>
+                <li><a href="#epidemic-demo">12. Real-World Modeling</a></li>
+                <li><a href="#use-cases">13. Novel Use Cases</a></li>
+            </ul>
+        </nav>
+
+        <!-- Section 1: Philosophy -->
+        <section id="philosophy">
+            <h2>1. Design Philosophy</h2>
+
+            <p>
+                Flux is built on a simple principle: <em>if the math can't be written on paper and look
+                    the same way, it isn't correct Flux.</em> This philosophy shapes every design decision.
+            </p>
+
+            <div class="theorem">
+                <p>
+                    <strong>Core Tenets of Flux:</strong>
+                </p>
+                <ol>
+                    <li><strong>Paper-Like Syntax</strong> — Math should look like math. Use <code>·</code> for
+                        scalar multiplication, <code>²</code> for squares, <code>×</code> for cross products.</li>
+                    <li><strong>Mathematical First</strong> — Vectors, Matrices, and Complex numbers are
+                        first-class citizens, not library add-ons.</li>
+                    <li><strong>Expression-Oriented</strong> — Everything evaluates to a value. Control
+                        structures are expressions, not statements.</li>
+                    <li><strong>Concise</strong> — Minimal punctuation, no unnecessary verbosity.
+                        Comments use <code>--</code> (mathematical tradition).</li>
+                    <li><strong>Embeddable</strong> — The VM is lightweight and easily integrated into
+                        C/C++ host applications.</li>
+                </ol>
+            </div>
+
+            <p>
+                Flux serves as the high-performance numerical engine of the <strong>Axiom Stack</strong>—a
+                collection of tools designed for mathematical computing, formal verification, and
+                AI-assisted reasoning.
+            </p>
+        </section>
+
+        <!-- Section 2: Getting Started -->
+        <section id="getting-started">
+            <h2>2. Getting Started</h2>
+
+            <h3>2.1 Installation (Windows)</h3>
+            <p><strong>Quick Install</strong></p>
+            <p>Flux is distributed as a standalone package. No compilation required.</p>
+            <ol>
+                <li>Download `flux-1.0.0-windows.zip` from the <a href="#">Releases Page</a>.</li>
+                <li>Extract the folder.</li>
+                <li>Right-click `install.ps1` and select <strong>"Run with PowerShell"</strong> (or run in terminal as
+                    Admin).</li>
+            </ol>
+            <pre><code class="language-powershell">powershell -ExecutionPolicy Bypass -File install.ps1</code></pre>
+
+            <h3>2.2 Installation (Linux / macOS)</h3>
+            <p>Download the latest tarball for your architecture.</p>
+            <pre><code class="language-bash"># Extract and install
+tar -xzf flux-1.0.0-linux.tar.gz
+cd flux-1.0.0
+sudo ./install.sh</code></pre>
+
+            <h3>2.3 Running Flux</h3>
+            <p>Launch the REPL to see the new scientific banner:</p>
+            <pre><code class="language-bash">flux</code></pre>
+            <pre><code class="language-text">   +-------------------------------------------------------------+
+   |    ______  __    __  __  __   __                            |
+   |   /\  ___\/\ \  /\\ /\ \/\_\_\_\                            |
+   |   \ \  __ \ \ \_\ \ \_\ \/_/\_\/_                           |
+   |    \ \_\   \ \_____\ \_____\/\_\/\_\                        |
+   |     \/_/    \/_____/\/_____/\/_/\/_/                        |
+   |                                                             |
+   |   Flux - Scientific Computational Engine                    |
+   |   v1.0.0                                                    |
+   +-------------------------------------------------------------+</code></pre>
+
+            <h3>2.3 Your First Flux Program</h3>
+            <p>Create a file <code>hello.flux</code>:</p>
+
+            <pre><code class="language-flux">-- A taste of paper-like math
+x = 3
+y = x² + 2·x + 1   -- (x + 1)² = 16
+
+if y > 10:
+    print "Math works!"
+    print y</code></pre>
+
+            <div class="paper-example">
+                <strong>On Paper:</strong> Given \(x = 3\), evaluate \(y = x^2 + 2x + 1\)<br>
+                <strong>In Flux:</strong> <code>y = x² + 2·x + 1</code><br>
+                <strong>Result:</strong> \(y = 9 + 6 + 1 = 16\)
+            </div>
+        </section>
+
+        <!-- Section 3: Paper-Like Syntax -->
+        <section id="paper-syntax">
+            <h2>3. Paper-Like Syntax</h2>
+            <p>Flux uses significant whitespace (indentation) instead of braces, and Unicode operators.</p>
+            <!-- ... (Multiplication/Superscript sections unchanged) ... -->
+
+
+            <h3>3.1 Multiplication Operators</h3>
+            <p>Flux supports three equivalent multiplication operators:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Name</th>
+                        <th>Unicode</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td>ASCII Asterisk</td>
+                        <td>U+002A</td>
+                        <td>Legacy/fallback</td>
+                    </tr>
+                    <tr>
+                        <td><code>·</code></td>
+                        <td>Middle Dot</td>
+                        <td>U+00B7</td>
+                        <td>Scalar multiplication, dot products</td>
+                    </tr>
+                    <tr>
+                        <td><code>×</code></td>
+                        <td>Multiplication Sign</td>
+                        <td>U+00D7</td>
+                        <td>Cross products, matrix multiplication</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <pre><code class="language-flux">-- All three are equivalent for scalar multiplication
+a = 3 · 4     -- Middle dot: 12
+b = 2 × 5     -- Times sign: 10  
+c = 5 * 6     -- ASCII asterisk: 30</code></pre>
+
+            <h3>3.2 Superscript Exponents</h3>
+            <p>
+                Use Unicode superscript digits for exponents—just like on paper!
+                Supported superscripts: <code>⁰¹²³⁴⁵⁶⁷⁸⁹</code>
+            </p>
+
+            <pre><code class="language-flux">x = 2
+quadratic = x² + 3·x + 2       -- x² is x^2
+cubic = x³ - 1                 -- x³ is x^3
+polynomial = x⁴ + 2·x² + 1     -- Higher powers work too!</code></pre>
+
+            <div class="paper-example">
+                <strong>Compare:</strong><br>
+                Traditional: <code>x^2 + 3*x + 2</code><br>
+                Flux: <code>x² + 3·x + 2</code><br><br>
+                \(x^2 + 3x + 2\) — Which looks more like the real thing?
+            </div>
+
+            <h3>3.3 Comments</h3>
+            <p>
+                Flux uses <code>--</code> for comments, following mathematical and Haskell conventions
+                rather than C-style <code>//</code>.
+            </p>
+
+            <pre><code class="language-flux">-- This is a single-line comment
+gravity = 9.8  -- Acceleration due to gravity (m/s²)</code></pre>
+        </section>
+
+        <!-- Section 4: Type System -->
+        <section id="type-system">
+            <h2>4. Type System</h2>
+
+            <p>
+                Flux is dynamically typed but uses optimized native C structures for mathematical types.
+            </p>
+
+            <h3>4.1 Primitive Types</h3>
+
+            <div class="definition">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>nil</code></td>
+                            <td>Absence of value</td>
+                            <td><code>nil</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>boolean</code></td>
+                            <td>Truth value</td>
+                            <td><code>true</code>, <code>false</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>number</code></td>
+                            <td>Double-precision float</td>
+                            <td><code>3.14159</code>, <code>42</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>string</code></td>
+                            <td>Immutable text</td>
+                            <td><code>"Hello, Flux!"</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>4.2 Mathematical Types</h3>
+
+            <div class="flux-definition">
+                <h4>Complex Numbers</h4>
+                <p>Native support for complex arithmetic.</p>
+                <pre><code class="language-flux">z = complex(3, 4)   -- 3 + 4i
+print abs(z)        -- 5 (magnitude)
+print conj(z)       -- 3 - 4i (conjugate)</code></pre>
+            </div>
+
+            <div class="flux-definition">
+                <h4>Vectors</h4>
+                <p>Dense dynamic arrays of doubles for linear algebra.</p>
+                <pre><code class="language-flux">v = vec(1, 2, 3)    -- 3D vector
+w = vec(4, 5, 6)
+print v · w         -- Dot product: 32</code></pre>
+            </div>
+
+            <div class="flux-definition">
+                <h4>Matrices</h4>
+                <p>2D dense matrices for linear algebra operations.</p>
+                <pre><code class="language-flux">A = mat([[1, 2], [3, 4]])
+I = mat([[1, 0], [0, 1]])   -- Identity
+print A × A              -- Matrix multiplication
+print det(A)             -- Determinant: -2</code></pre>
+            </div>
+        </section>
+
+        <!-- Section 5: Operators -->
+        <section id="operators">
+            <h2>5. Operators</h2>
+
+            <h3>5.1 Arithmetic Operators</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Unicode</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>+</code></td>
+                        <td>—</td>
+                        <td>Addition</td>
+                        <td><code>3 + 4</code> → <code>7</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>-</code></td>
+                        <td>—</td>
+                        <td>Subtraction</td>
+                        <td><code>7 - 2</code> → <code>5</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td><code>· ×</code></td>
+                        <td>Multiplication</td>
+                        <td><code>3 · 4</code> → <code>12</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/</code></td>
+                        <td>—</td>
+                        <td>Division</td>
+                        <td><code>10 / 4</code> → <code>2.5</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>—</td>
+                        <td>Modulo</td>
+                        <td><code>10 % 3</code> → <code>1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>^</code></td>
+                        <td><code>²³⁴⁵...</code></td>
+                        <td>Exponentiation</td>
+                        <td><code>x²</code> → <code>x^2</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.2 Comparison Operators</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>==</code></td>
+                        <td>Equal</td>
+                        <td><code>x == y</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>!=</code></td>
+                        <td>Not equal</td>
+                        <td><code>x != y</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;</code></td>
+                        <td>Less than</td>
+                        <td><code>x &lt; y</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;</code></td>
+                        <td>Greater than</td>
+                        <td><code>x &gt; y</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;=</code></td>
+                        <td>Less or equal</td>
+                        <td><code>x &lt;= y</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;=</code></td>
+                        <td>Greater or equal</td>
+                        <td><code>x &gt;= y</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.3 Logical Operators</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>and</code></td>
+                        <td>Logical AND</td>
+                        <td><code>a and b</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>or</code></td>
+                        <td>Logical OR</td>
+                        <td><code>a or b</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>!</code></td>
+                        <td>Logical NOT</td>
+                        <td><code>!a</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 6: Linear Algebra -->
+        <section id="linear-algebra">
+            <h2>6. Linear Algebra</h2>
+
+            <p>
+                Flux treats linear algebra as a first-class concern. Vectors and matrices
+                have dedicated types with natural syntax for common operations.
+            </p>
+
+            <h3>6.1 Vectors</h3>
+
+            <div class="flux-example">
+                <h4>Example: Physics — Work Calculation</h4>
+                <p>Work = Force · Displacement (dot product)</p>
+                <pre><code class="language-flux">-- Define force and displacement vectors
+F = vec(10, 0, 0)   -- 10N in x-direction
+d = vec(5, 5, 0)    -- 5m in x, 5m in y
+
+-- Calculate work using dot product
+W = F · d
+print W             -- Output: 50 (Joules)</code></pre>
+            </div>
+
+            <p>Vector operations:</p>
+            <pre><code class="language-flux">a = vec(1, 2, 3)
+b = vec(4, 5, 6)
+
+print a + b             -- Vector addition: vec(5, 7, 9)
+print a - b             -- Vector subtraction: vec(-3, -3, -3)
+print a · b             -- Dot product: 32
+print cross(a, b)       -- Cross product: vec(-3, 6, -3)
+print len(a)            -- Length (dimension): 3</code></pre>
+
+            <h3>6.2 Matrices</h3>
+
+            <div class="flux-example">
+                <h4>Example: Linear Transformation</h4>
+                <pre><code class="language-flux">-- 2x2 rotation matrix (90 degrees)
+R = mat([[0, -1], [1, 0]])
+
+-- Identity matrix
+I = mat([[1, 0], [0, 1]])
+
+-- Matrix operations
+print R × R              -- R² = 180° rotation
+print det(R)             -- Determinant: 1
+print transpose(R)       -- Transpose</code></pre>
+            </div>
+
+            <p>Matrix operations:</p>
+            <pre><code class="language-flux">A = mat([[1, 2], [3, 4]])
+B = mat([[5, 6], [7, 8]])
+
+print A + B             -- Element-wise addition
+print A × B             -- Matrix multiplication
+print det(A)            -- Determinant: -2
+print transpose(A)      -- Transpose</code></pre>
+        </section>
+
+        <!-- Section 7: Complex Numbers -->
+        <section id="complex-numbers">
+            <h2>7. Complex Numbers</h2>
+
+            <p>
+                Native complex number support enables clean implementation of signal processing,
+                control systems, and quantum mechanics algorithms.
+            </p>
+
+            <h3>7.1 Basic Operations</h3>
+            <pre><code class="language-flux">z1 = complex(3, 4)   -- 3 + 4i
+z2 = complex(1, 2)   -- 1 + 2i
+
+print z1 + z2        -- 4 + 6i
+print z1 × z2        -- -5 + 10i
+print z1 / z2        -- 2.2 - 0.4i</code></pre>
+
+            <h3>7.2 Complex Functions</h3>
+            <pre><code class="language-flux">z = complex(3, 4)
+
+print abs(z)             -- 5 (magnitude: √(3² + 4²))
+print conj(z)            -- 3 - 4i (conjugate)
+print real(z)            -- 3 (real part)
+print imag(z)            -- 4 (imaginary part)</code></pre>
+
+            <div class="paper-example">
+                <strong>Euler's Identity:</strong> \(e^{i\pi} + 1 = 0\)<br><br>
+                In Flux (planned):<br>
+                <code>print exp(complex(0, π)) + 1  -- ≈ 0</code>
+            </div>
+        </section>
+
+        <!-- Section 8: Calculus -->
+        <section id="calculus">
+            <h2>8. Numerical Calculus</h2>
+
+            <p>
+                Flux includes built-in numerical methods for differentiation and integration
+                via the Prelude library.
+            </p>
+
+            <h3>8.1 Differentiation</h3>
+            <p>
+                The <code>deriv(f, x)</code> function computes the numerical derivative
+                of function <code>f</code> at point <code>x</code> using central differences.
+            </p>
+
+            <pre><code class="language-flux">f(x) = x² + 2·x + 1  -- Math-style definition
+
+print deriv(f, 3)    -- d/dx at x=3 → ~8.0
+                      -- (Analytical: 2x + 2 = 8)</code></pre>
+
+            <h3>8.2 Integration</h3>
+            <p>
+                The <code>integrate(f, a, b)</code> function computes the definite integral
+                \(\int_a^b f(x)\,dx\) using Simpson's rule.
+            </p>
+
+            <pre><code class="language-flux">g(x) = x²
+
+print integrate(g, 0, 1)    -- ∫₀¹ x² dx → ~0.333
+                             -- (Analytical: 1/3)</code></pre>
+
+            <div class="flux-example">
+                <h4>Example: Kinematic Equations</h4>
+                <p>Given acceleration, find velocity and position.</p>
+                <pre><code class="language-flux">-- Constant acceleration
+a(t) = 9.8
+
+-- Velocity: ∫a·dt from 0 to t
+print integrate(a, 0, 5)    -- v(5) ≈ 49 m/s
+
+-- For more complex scenarios, use numerical ODE solvers (planned)</code></pre>
+            </div>
+        </section>
+
+        <!-- Section 9: Functions -->
+        <section id="functions">
+            <h2>9. Functions</h2>
+
+            <h3>9.1 Function Declaration</h3>
+            <pre><code class="language-flux">-- Math-style (Recommended)
+square(x) = x²
+
+-- Block-style (also valid with indentation)
+fun add(a, b):
+    return a + b
+
+print square(5)      -- 25
+print add(3, 4)      -- 7</code></pre>
+
+            <h3>9.2 First-Class Functions</h3>
+            <p>Functions are values and can be passed as arguments:</p>
+            <pre><code class="language-flux">apply_twice(f, x) = f(f(x))
+increment(n) = n + 1
+
+print apply_twice(increment, 5)  -- 7</code></pre>
+
+            <h3>9.3 Closures</h3>
+            <p>Functions capture their enclosing environment:</p>
+            <pre><code class="language-flux">fun make_adder(n):
+    f(x) = x + n
+    return f
+
+add5 = make_adder(5)
+print add5(10)    -- 15</code></pre>
+
+            <h3>9.4 Planned: Pattern Matching (Future)</h3>
+            <pre><code class="language-flux">-- Math-style function definition (planned)
+factorial(0) = 1
+factorial(n) = n · factorial(n - 1)
+
+-- Fibonacci (planned)
+fib(0) = 0
+fib(1) = 1
+fib(n) = fib(n - 1) + fib(n - 2)</code></pre>
+        </section>
+
+        <!-- Section 10: Control Flow -->
+        <section id="control-flow">
+            <h2>10. Control Flow</h2>
+
+            <h3>10.1 Conditionals</h3>
+            <pre><code class="language-flux">x = 10
+
+if x > 5:
+    print "x is greater than 5"
+else:
+    print "x is 5 or less"</code></pre>
+
+            <h3>10.2 While Loops</h3>
+            <pre><code class="language-flux">i = 0
+while i < 5:
+    print i
+    i = i + 1</code></pre>
+
+            <h3>10.3 For Loops</h3>
+            <pre><code class="language-flux">-- "for" loop desugars to while
+i = 0
+while i < 10:
+    print i²
+    i = i + 1</code></pre>
+
+            <h3>10.4 Expression-Oriented If</h3>
+            <pre><code class="language-flux">-- If-then-else is an expression!
+max = if a > b then a else b
+
+-- Nested if expressions
+sign = if x > 0 then 1 else if x < 0 then -1 else 0</code></pre>
+        </section>
+
+        <!-- Section 11: Prelude -->
+        <section id="prelude">
+            <h2>11. Standard Library (Prelude)</h2>
+
+            <p>
+                Flux's standard library is split into two layers: <strong>native functions</strong>
+                (implemented in C for performance) and the <strong>Prelude</strong> (implemented in Flux
+                itself for flexibility).
+            </p>
+
+            <h3>11.1 Native Functions</h3>
+
+            <h4>Mathematical Functions</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sin(x)</code></td>
+                        <td>Sine</td>
+                        <td><code>sin(π/2)</code> → <code>1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>cos(x)</code></td>
+                        <td>Cosine</td>
+                        <td><code>cos(0)</code> → <code>1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>tan(x)</code></td>
+                        <td>Tangent</td>
+                        <td><code>tan(π/4)</code> → <code>1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sinh(x)</code>/<code>cosh(x)</code>/<code>tanh(x)</code></td>
+                        <td>Hyperbolic functions</td>
+                        <td><code>sinh(0)</code> → <code>0</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>asin(x)</code>/<code>acos(x)</code>/<code>atan(x)</code></td>
+                        <td>Inverse Trigonometric</td>
+                        <td><code>asin(1)</code> → <code>π/2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>exp(x)</code></td>
+                        <td>Exponential</td>
+                        <td><code>exp(1)</code> → <code>e</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>log(x)</code></td>
+                        <td>Natural logarithm</td>
+                        <td><code>log(e)</code> → <code>1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sqrt(x)</code></td>
+                        <td>Square root</td>
+                        <td><code>sqrt(4)</code> → <code>2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pow(x, n)</code></td>
+                        <td>Power</td>
+                        <td><code>pow(2, 10)</code> → <code>1024</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>abs(x)</code></td>
+                        <td>Absolute value</td>
+                        <td><code>abs(-5)</code> → <code>5</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Linear Algebra Functions</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>dot(a, b)</code></td>
+                        <td>Vector dot product</td>
+                    </tr>
+                    <tr>
+                        <td><code>cross(a, b)</code></td>
+                        <td>Vector cross product (3D)</td>
+                    </tr>
+                    <tr>
+                        <td><code>det(M)</code></td>
+                        <td>Matrix determinant</td>
+                    </tr>
+                    <tr>
+                        <td><code>transpose(M)</code></td>
+                        <td>Matrix transpose</td>
+                    </tr>
+                    <tr>
+                        <td><code>mul(A, B)</code></td>
+                        <td>Matrix multiplication</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Utility Functions</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>print(x)</code></td>
+                        <td>Print value to console</td>
+                    </tr>
+                    <tr>
+                        <td><code>len(x)</code></td>
+                        <td>Length of vector/array/string</td>
+                    </tr>
+                    <tr>
+                        <td><code>clock()</code></td>
+                        <td>Current time in seconds</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>11.2 Prelude Functions</h3>
+            <p>High-level functions implemented in Flux:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>deriv(f, x)</code></td>
+                        <td>Numerical derivative at point</td>
+                    </tr>
+                    <tr>
+                        <td><code>integrate(f, a, b)</code></td>
+                        <td>Definite integral (Simpson's Rule)</td>
+                    </tr>
+                    <tr>
+                        <td><code>ode_solve(f, y0, t0, t1)</code></td>
+                        <td>Solve ODE <code>y' = f(t, y)</code> (RK4)</td>
+                    </tr>
+                    <tr>
+                        <td><code>solve(f, guess)</code></td>
+                        <td>Find root <code>f(x) = 0</code> (Newton-Raphson)</td>
+                    </tr>
+                    <tr>
+                        <td><code>sum(arr)</code></td>
+                        <td>Sum of array elements</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 12: Real-World Modeling -->
+        <section id="epidemic-demo">
+            <h2>12. Real-World Modeling</h2>
+            <div class="demo-container" style="display: flex; gap: 2rem; align-items: start; margin-top: 2rem;">
+                <div class="code-column" style="flex: 1;">
+                    <h3>Epidemic Simulation (SIR Model)</h3>
+                    <p>Flux makes it trivial to model complex systems. Here we simulate a disease spread among 300
+                        particles using simple vector math and state logic.</p>
+                    <pre><code class="language-flux">-- Disease Logic
+if state[i] == INFECTED:
+    -- Check for susceptible neighbors
+    j = 0;
+    while j < NUM_PARTICLES:
+        if state[j] == SUSCEPTIBLE:
+            delta = pos[j] - pos[i];
+            
+            -- Vector distance check
+            dist_sq = dot(delta, delta);
+            
+            if dist_sq < INFECTION_RADIUS^2:
+                -- Probabilistic infection
+                if random() < INFECTION_PROB:
+                    state[j] = INFECTED;
+        j = j + 1;
+
+-- State Transitions
+if recovery_timer[i] > RECOVERY_TIME:
+    state[i] = RECOVERED;</code></pre>
+                </div>
+                <div class="visual-column" style="flex: 1;">
+                    <img src="img/epidemic.gif" alt="Epidemic Simulation"
+                        style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #ddd;">
+                    <p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 0.5rem;">
+                        <i><b>Figure 1:</b> 300 agents interacting in real-time.<br>
+                            <span style="color:red">Red = Infected</span>,
+                            <span style="color:green">Green = Susceptible</span>,
+                            <span style="color:blue">Blue = Recovered</span></i>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 13: Novel Use Cases -->
+        <section id="use-cases">
+            <h2>13. Novel Use Cases</h2>
+
+            <p>
+                Flux isn't just another scripting language—it's a <strong>computational kernel</strong>
+                designed to bridge the gap between human mathematical thinking and machine execution.
+                Here's how it's being used in ways no other language can match.
+            </p>
+
+            <h3>13.1 The Alexitha Bridge — Teaching AI to Actually Do Math</h3>
+
+            <div class="flux-example">
+                <h4>The Problem: LLMs Hallucinate Numbers</h4>
+                <p>
+                    When you ask ChatGPT "What's the integral of x² from 0 to 1?", it doesn't <em>compute</em>
+                    the answer—it <em>predicts</em> what the answer probably looks like based on training data.
+                    Sometimes it's right. Sometimes it confidently outputs complete nonsense.
+                </p>
+
+                <h4>The Solution: Verified Computation</h4>
+                <p>
+                    <a href="https://github.com/fawazishola/alexthia">Alexitha</a> is a 7B parameter AI model
+                    that generates <strong>Flux code</strong> instead of raw answers. The code is then
+                    <strong>executed</strong> by the Flux VM, guaranteeing mathematical correctness.
+                </p>
+
+                <div class="paper-example">
+                    <strong>The Verification Loop:</strong><br><br>
+                    1. User asks: <em>"What's ∫₀¹ x² dx?"</em><br>
+                    2. Alexitha generates: <code>integrate(fun(x) x², 0, 1)</code><br>
+                    3. Flux VM computes: <strong>0.333333...</strong><br>
+                    4. <strong>Verified answer</strong> — mathematically impossible to hallucinate
+                </div>
+
+                <pre><code class="language-python"># The FluxBridge — Where AI Meets Mathematics
+from core.flux_bridge import FluxBridge
+
+bridge = FluxBridge()
+result = bridge.execute("""
+    f(x) = x²
+    answer = integrate(f, 0, 1)
+    print answer
+""")
+
+# Output: {"stdout": "0.333333", "success": true, "duration": 0.002}
+# The answer is COMPUTED, not guessed.</code></pre>
+            </div>
+
+            <p>
+                <strong>Why this matters:</strong> This is the first step toward AI systems that can
+                <em>prove</em> their answers are correct. Flux serves as the "ground truth" engine—a
+                mathematical oracle that the AI must satisfy.
+            </p>
+
+            <h3>13.2 First-Principles Simulation — Physics From Scratch</h3>
+
+            <div class="flux-example">
+                <h4>No Black Boxes. No Hidden Magic. Just Physics.</h4>
+                <p>
+                    Most scientific computing relies on massive libraries (NumPy, SciPy, MATLAB) that
+                    abstract away the mathematics. You call <code>scipy.integrate.odeint()</code> and
+                    pray it works. But what's actually happening?
+                </p>
+
+                <p>
+                    Flux takes a radical approach: <strong>write the physics yourself</strong>. Every
+                    simulation is built from first principles using explicit numerical methods. No magic.
+                    Complete transparency. Total control.
+                </p>
+
+                <pre><code class="language-flux">-- Projectile Motion: From F = ma to Trajectory
+-- Not a library call. The actual physics.
+
+g = 9.8              -- Gravitational acceleration
+v0 = 50              -- Initial velocity (m/s)  
+θ = 45 * π / 180     -- Launch angle (radians)
+
+-- Initial conditions
+vx = v0 · cos(θ)     -- Horizontal velocity (constant)
+vy = v0 · sin(θ)     -- Vertical velocity (changes)
+x = 0
+y = 0
+t = 0
+dt = 0.001           -- Time step (1 millisecond)
+
+-- Euler Integration: The fundamental algorithm
+while y >= 0:
+    -- Update position (s = s₀ + v·Δt)
+    x = x + vx · dt
+    y = y + vy · dt
+    
+    -- Update velocity (v = v₀ + a·Δt, and a = -g)
+    vy = vy - g · dt
+    
+    t = t + dt
+
+print "Range: " + x + " meters"
+print "Max height reached at t = " + (v0 · sin(θ) / g) + "s"</code></pre>
+            </div>
+
+            <p>
+                <strong>Educational Power:</strong> When Alexitha learns physics, it doesn't memorize
+                formulas—it <em>derives simulations</em>. Every line of code maps to a physical principle.
+                The AI understands <em>why</em> projectiles follow parabolas, not just <em>that</em> they do.
+            </p>
+
+            <h3>13.3 Game Theory Integration — Where Math Meets Strategy</h3>
+
+            <div class="flux-example">
+                <h4>Computing Payoffs for Strategic Games</h4>
+                <p>
+                    <a href="https://github.com/fawazishola/Tenet">Tenet</a> is a domain-specific language
+                    for modeling strategic interactions. But real-world payoffs aren't simple numbers—they're
+                    <strong>complex functions</strong> of multiple variables. That's where Flux comes in.
+                </p>
+
+                <pre><code class="language-flux">-- Utility function for economic modeling
+-- Risk-adjusted return with diminishing marginal utility
+
+utility(wealth, risk) = sqrt(wealth) · exp(-0.1 · risk²)
+
+-- Payoff calculations for a market entry game
+entry_payoff(market_size, competitors) = 
+    market_size / (competitors + 1) - 50000  -- Fixed entry cost
+
+-- Tenet can import these for Nash equilibrium analysis:
+-- payoff Firm1 { (Enter, Stay): entry_payoff(1000000, 2) }
+
+-- Compute and verify
+print "Utility(100, 2): " + utility(100, 2)       -- ~6.7
+print "Entry payoff: " + entry_payoff(1000000, 2) -- ~283,333</code></pre>
+            </div>
+
+            <p>
+                This separation is powerful: <strong>Tenet handles the strategy</strong>,
+                <strong>Flux handles the math</strong>. Economists can model complex real-world
+                scenarios where payoffs depend on non-linear utility functions, risk preferences,
+                and multi-variable optimization.
+            </p>
+
+            <h3>13.4 Operating System Executor — The Axiom Scheduler's Engine</h3>
+
+            <div class="flux-example">
+                <h4>When Game Theory Meets the Linux Kernel</h4>
+                <p>
+                    In <strong>Axiom OS</strong>, scheduling isn't done with simple heuristics like
+                    FIFO or Round Robin. Instead, <strong>Tenet</strong> models each task as a
+                    <em>player</em> in a resource allocation game, finds the <strong>Nash equilibrium</strong>,
+                    and then <strong>Flux executes</strong> the allocation using Linux cgroups.
+                </p>
+
+                <pre><code class="language-flux">-- Auto-generated by Tenet Scheduler
+-- This script ENFORCES the Nash equilibrium allocation
+
+print "=== Axiom Game-Theoretic Scheduler ==="
+
+-- HIGH priority: octave_sim (Nash allocation: 4 cores, 8GB)
+print "[EXEC] octave_sim (HIGH priority)"
+cgroup_create("octave_sim")
+cgroup_set_cpu("octave_sim", 4096)          -- CPU shares
+cgroup_set_memory("octave_sim", 8589934592) -- 8GB hard limit
+exit_code = cgroup_exec("octave_sim", "octave simulation.m")
+print "  → Completed with exit code " + exit_code
+cgroup_delete("octave_sim")
+
+-- MED priority: r_analysis (Nash allocation: 2 cores, 16GB)
+print "[EXEC] r_analysis (MEDIUM priority)"  
+cgroup_create("r_analysis")
+cgroup_set_cpu("r_analysis", 2048)
+cgroup_set_memory("r_analysis", 17179869184) -- 16GB
+exit_code = cgroup_exec("r_analysis", "Rscript analysis.R")
+print "  → Completed with exit code " + exit_code
+cgroup_delete("r_analysis")
+
+print "=== All Tasks Complete ==="</code></pre>
+            </div>
+
+            <div class="theorem">
+                <p><strong>The Axiom Architecture:</strong></p>
+                <ol>
+                    <li><strong>Tenet</strong> receives job submissions and models them as an N-player game</li>
+                    <li><strong>Tenet</strong> computes the Nash equilibrium using iterative best-response</li>
+                    <li><strong>Flux</strong> receives the optimal allocation as an executable script</li>
+                    <li><strong>Flux</strong> enforces resource limits via Linux cgroups v2</li>
+                    <li><strong>Alexitha</strong> observes execution outcomes and learns to improve predictions</li>
+                </ol>
+            </div>
+
+            <p>
+                <strong>This is not a normal scheduler.</strong> Traditional schedulers use heuristics
+                that can lead to starvation, unfairness, or thrashing. The Axiom scheduler uses
+                <em>game theory</em>—where fairness and efficiency emerge mathematically from the
+                equilibrium, not from hand-tuned rules.
+            </p>
+        </section>
+
+        <footer>
+            <hr>
+            <p>
+                <strong>Flux</strong> is part of the <a href="https://github.com/fawazishola">Axiom Stack</a>.<br>
+                Licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+            </p>
+            <p>
+                <em>Documentation styled with <a href="https://latex.vercel.app/">LaTeX.css</a></em>
+            </p>
+        </footer>
+    </article>
+
+    <script>
+        // Dark mode toggle
+        document.querySelector("#dark-mode-toggle").addEventListener('click', () => {
+            document.body.classList.toggle("latex-dark");
+            document.body.classList.remove("latex-dark-auto");
+        });
+    </script>
+</body>
+
+</html>

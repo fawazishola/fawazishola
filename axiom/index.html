@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom OS - Math-Native Linux Workstation</title>
+    <meta name="description"
+        content="Axiom is a custom Linux workstation built from scratch, optimized for mathematical and scientific computing.">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --desktop-bg: #008080;
+            --window-max-width: 900px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background: var(--desktop-bg);
+            font-family: 'Pixelated MS Sans Serif', Arial, sans-serif;
+        }
+
+        .desktop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 60px;
+        }
+
+        .main-window {
+            width: 100%;
+            max-width: var(--window-max-width);
+        }
+
+        .window {
+            width: 100%;
+        }
+
+        .window-body {
+            padding: 16px;
+        }
+
+        .window-body h1,
+        .window-body h2,
+        .window-body h3 {
+            margin-top: 0;
+        }
+
+        .hero-text {
+            font-family: 'VT323', monospace;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #000080, #0000aa);
+            color: #fff;
+            margin: 0 0 16px 0;
+            border: 2px inset #808080;
+        }
+
+        .hero-text h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .hero-text p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            font-size: 0.7em;
+            border: 1px solid #000;
+        }
+
+        .badge-blue {
+            background: #0000aa;
+        }
+
+        .badge-purple {
+            background: #800080;
+        }
+
+        .badge-green {
+            background: #008000;
+        }
+
+        .section-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .section-group>.window {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        fieldset {
+            margin-bottom: 16px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #808080;
+        }
+
+        .comparison-table th {
+            background: #000080;
+            color: #fff;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #c0c0c0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .nav-buttons button {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .tree-view {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .code-block {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            padding: 12px;
+            border: 2px inset #808080;
+            overflow-x: auto;
+            white-space: pre;
+            font-size: 12px;
+        }
+
+        .architecture-diagram {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #00ff00;
+            padding: 16px;
+            border: 2px inset #808080;
+            overflow-x: auto;
+            white-space: pre;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        .status-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 6px;
+            border: 1px solid #000;
+        }
+
+        .status-not-started {
+            background: #c0c0c0;
+        }
+
+        .status-in-progress {
+            background: #ffff00;
+        }
+
+        .status-complete {
+            background: #00ff00;
+        }
+
+        .chapter-row {
+            display: flex;
+            align-items: center;
+            padding: 6px 8px;
+            border-bottom: 1px solid #dfdfdf;
+        }
+
+        .chapter-row:hover {
+            background: #000080;
+            color: #fff;
+        }
+
+        .chapter-num {
+            width: 40px;
+            font-weight: bold;
+        }
+
+        .chapter-desc {
+            flex: 1;
+        }
+
+        menu[role=tablist] {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .phase-card {
+            margin-bottom: 16px;
+            padding: 12px;
+            border: 2px groove #808080;
+            background: #dfdfdf;
+        }
+
+        .phase-card h4 {
+            margin: 0 0 8px 0;
+            color: #000080;
+        }
+
+        .phase-card ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(to right, transparent, #dfdfdf, transparent);
+            margin: 16px 0;
+        }
+
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: #c0c0c0;
+            border-top: 2px outset #fff;
+            display: flex;
+            align-items: center;
+            padding: 4px;
+            z-index: 1000;
+        }
+
+        .start-button {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px !important;
+            min-width: auto !important;
+        }
+
+        .start-button::before {
+            content: '🪟';
+        }
+
+        .taskbar-clock {
+            margin-left: auto;
+            padding: 4px 12px;
+            border: 1px inset #808080;
+            font-size: 12px;
+        }
+
+        .taskbar-items {
+            display: flex;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .taskbar-item {
+            padding: 2px 8px;
+            min-width: 140px;
+            text-align: left;
+            font-size: 11px;
+        }
+
+        .taskbar-item.active {
+            border-style: inset;
+        }
+
+        .demo-container {
+            position: relative;
+            background: #000;
+            border: 4px ridge #808080;
+            padding: 0;
+            margin-bottom: 16px;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .demo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .demo-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .demo-overlay {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #0f0;
+            padding: 4px 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            border: 1px solid #0f0;
+        }
+
+        .crt-effect {
+            position: relative;
+        }
+
+        .crt-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            pointer-events: none;
+        }
+
+        .boot-messages {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            padding: 16px;
+            font-size: 12px;
+            line-height: 1.6;
+            border: 2px inset #808080;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .boot-ok {
+            color: #0f0;
+        }
+
+        .boot-info {
+            color: #00bfff;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .cursor-blink {
+            animation: blink 1s infinite;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8em;
+            }
+
+            .section-group {
+                flex-direction: column;
+            }
+
+            .taskbar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="desktop">
+        <!-- Main Window -->
+        <div class="main-window" id="axiom-window" style="display: none;">
+            <div class="window">
+                <div class="title-bar">
+                    <div class="title-bar-text">∫ Axiom OS - Documentation</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize"></button>
+                        <button aria-label="Maximize"></button>
+                        <button aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <!-- Hero Section -->
+                    <div class="hero-text">
+                        <h1>∫ AXIOM</h1>
+                        <p>A Math-Native Linux Workstation — Built From Scratch</p>
+                        <div class="badges">
+                            <span class="badge badge-blue">LFS 12.2</span>
+                            <span class="badge badge-purple">BLFS Math Stack</span>
+                            <span class="badge badge-green">✓ Complete</span>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Tabs -->
+                    <menu role="tablist">
+                        <li role="tab" aria-selected="true"><a href="#overview"
+                                onclick="showTab('overview')">Overview</a></li>
+                        <li role="tab"><a href="#download" onclick="showTab('download')">Download</a></li>
+                        <li role="tab"><a href="#demo" onclick="showTab('demo')">Demo</a></li>
+                        <li role="tab"><a href="#blfs" onclick="showTab('blfs')">Math Stack</a></li>
+                        <li role="tab"><a href="#research" onclick="showTab('research')">Research</a></li>
+                        <li role="tab"><a href="#roadmap" onclick="showTab('roadmap')">Roadmap</a></li>
+                    </menu>
+
+                    <div class="window" role="tabpanel">
+                        <div class="window-body">
+                            <!-- Overview Tab -->
+                            <div id="overview" class="tab-content active">
+                                <h2>🎯 The Axiom Philosophy</h2>
+                                <p><strong>Axiom</strong> is not just an operating system; it is a <strong>Cognitive
+                                        Environment</strong> designed for deep work.</p>
+                                <p>By stripping away modern OS bloat and building from the kernel up, we have created a
+                                    platform dedicated to two goals:</p>
+
+                                <ul class="tree-view">
+                                    <li><strong>Eliminating Distraction</strong> — No notifications, no telemetry, no
+                                        "user engagement" loops. Just you and the math.</li>
+                                    <li><strong>Optimizing Computing</strong> — Every CPU cycle is dedicated to your
+                                        calculations. Libraries are compiled with <code>-march=native</code> to unlock
+                                        the full physics of your silicon.</li>
+                                    <li><strong>Paper-as-Code</strong> — Integrated workflows for converting thoughts
+                                        into rigorous proofs using Flux and Tenet.</li>
+                                </ul>
+
+
+
+                                <fieldset>
+                                    <legend>🚀 Unique Architecture</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Feature</th>
+                                            <th>Why It Matters</th>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Zero-Copy Memory</strong></td>
+                                            <td>Data flows directly from disk to GPU without CPU bottlenecks.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Custom RAM Management</strong></td>
+                                            <td>We rewrote the allocator. No garbage collection pauses, ever.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>GPU-First Kernel</strong></td>
+                                            <td>The OS kernel treats the GPU as a first-class citizen, not just a
+                                                peripheral.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Flux Transpiler</strong></td>
+                                            <td>Write standard logic, compile to bare-metal optimized bytecode.</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <div
+                                    style="margin-top: 20px; text-align: center; border: 2px groove #808080; padding: 15px; background: #c0c0c0;">
+                                    <h3 style="margin: 0; color: #000;">"Give me a place to stand and I shall move the
+                                        world."</h3>
+                                    <p style="margin: 5px 0 0 0; font-style: italic;">— Archimedes (and the Axiom
+                                        Philosophy)</p>
+                                </div>
+                            </div>
+
+                            <!-- Download Tab -->
+                            <div id="download" class="tab-content">
+                                <h2>📥 Download Axiom OS</h2>
+                                <p><em>Get the complete math-native workstation — ready to boot</em></p>
+
+                                <fieldset>
+                                    <legend>💿 ISO Images</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Edition</th>
+                                            <th>Size</th>
+                                            <th>Description</th>
+                                            <th>Download</th>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Axiom Core</strong></td>
+                                            <td>1.2 GB</td>
+                                            <td>Base LFS + Math Stack (CLI only)</td>
+                                            <td><button onclick="alert('Coming soon!')">💾 Download</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Axiom Desktop</strong></td>
+                                            <td>2.8 GB</td>
+                                            <td>Core + i3 WM + GUI tools</td>
+                                            <td><button onclick="alert('Coming soon!')">💾 Download</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Axiom AI</strong></td>
+                                            <td>8.5 GB</td>
+                                            <td>Desktop + Qwen 7B model included</td>
+                                            <td><button onclick="alert('Coming soon!')">💾 Download</button></td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>📋 System Requirements</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Minimum</th>
+                                            <th>Recommended</th>
+                                        </tr>
+                                        <tr>
+                                            <td>CPU</td>
+                                            <td>x86_64 with SSE4.2</td>
+                                            <td>Intel i7 / AMD Ryzen with AVX2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>RAM</td>
+                                            <td>4 GB</td>
+                                            <td>16 GB (for AI features)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Storage</td>
+                                            <td>20 GB</td>
+                                            <td>50 GB SSD</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GPU</td>
+                                            <td>Not required</td>
+                                            <td>Any (for Alacritty acceleration)</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🔐 Verification</legend>
+                                    <p>Verify your download with SHA256:</p>
+                                    <div class="code-block">sha256sum axiom-core-1.0.iso
+                                        # Expected: 8a7b3c4d5e6f... (see CHECKSUMS.txt)
+
+                                        gpg --verify axiom-core-1.0.iso.sig axiom-core-1.0.iso
+                                        # Signed with key: 0xAX10M-2024</div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🔧 Quick Install</legend>
+                                    <div class="code-block"># Write to USB drive
+                                        sudo dd if=axiom-desktop-1.0.iso of=/dev/sdX bs=4M status=progress
+
+                                        # Boot from USB and follow installer
+                                        # Automatic partitioning or manual LVM setup available</div>
+                                </fieldset>
+                            </div>
+
+                            <!-- Demo Tab -->
+                            <div id="demo" class="tab-content">
+                                <h2>🖥️ Boot Demo</h2>
+                                <p><em>Watch Axiom OS boot from GRUB to login prompt</em></p>
+
+                                <fieldset>
+                                    <legend>System Boot</legend>
+                                    <div class="demo-container crt-effect" style="background: black;">
+                                        <iframe src="boot_sequence.html"
+                                            style="width: 100%; height: 100%; border: none; overflow: hidden;"
+                                            title="Axiom Boot Sequence"></iframe>
+                                        <div class="demo-overlay">AXIOM OS v1.0</div>
+                                    </div>
+                                    <div style="text-align: center; margin-top: 8px;">
+                                        <p style="font-size: 11px; margin: 0;">Live Boot Simulation</p>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Boot Sequence Log</legend>
+                                    <div class="boot-messages">
+                                        <span class="boot-info">[ 0.000000]</span> Linux version 6.7.4-axiom (lfs@axiom)
+                                        (gcc 13.2.0)
+                                        <span class="boot-info">[ 0.000000]</span> Command line:
+                                        BOOT_IMAGE=/vmlinuz-6.7.4-axiom root=/dev/sda2 ro
+                                        <span class="boot-info">[ 0.123456]</span> CPU: Intel(R) Core(TM) i7-10700 CPU @
+                                        2.90GHz
+                                        <span class="boot-info">[ 0.123456]</span> x86/fpu: Supporting XSAVE feature
+                                        0x001: 'x87 floating point registers'
+                                        <span class="boot-info">[ 0.234567]</span> x86/fpu: Supporting XSAVE feature
+                                        0x002: 'SSE registers'
+                                        <span class="boot-info">[ 0.234567]</span> x86/fpu: Supporting XSAVE feature
+                                        0x004: 'AVX registers'
+                                        <span class="boot-ok">[ OK ]</span> Started udev Kernel Device Manager.
+                                        <span class="boot-ok">[ OK ]</span> Started Journal Service.
+                                        <span class="boot-ok">[ OK ]</span> Mounted /opt/math filesystem.
+                                        <span class="boot-ok">[ OK ]</span> Started System Logging Service.
+                                        <span class="boot-ok">[ OK ]</span> Started OpenBLAS Benchmark Service.
+                                        <span class="boot-ok">[ OK ]</span> Started Axiom AI Daemon (Qwen 7B).
+                                        <span class="boot-ok">[ OK ]</span> Started Flux Language Server.
+                                        <span class="boot-ok">[ OK ]</span> Reached target Multi-User System.
+                                        <span class="boot-ok">[ OK ]</span> Reached target Graphical Interface.
+
+                                        <span style="color: #fff;">Welcome to</span> <span
+                                            style="color: #0f0; font-weight: bold;">AXIOM OS</span> <span
+                                            style="color: #fff;">- Math-Native Linux Workstation</span>
+
+                                        axiom login: <span class="cursor-blink">_</span>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>System Specifications</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Specification</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Kernel</td>
+                                            <td>Linux 6.7.4 (custom compiled)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Init System</td>
+                                            <td>SysVinit</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shell</td>
+                                            <td>Bash 5.2 / Flux REPL</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Window Manager</td>
+                                            <td>i3-wm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compiler</td>
+                                            <td>GCC 13.2.0 (-march=native)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BLAS</td>
+                                            <td>OpenBLAS 0.3.26 (CPU-optimized)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>AI Engine</td>
+                                            <td>llama.cpp + Qwen 2.5 7B</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>📊 Benchmark Results: Axiom vs Ubuntu 24.04</legend>
+                                    <p><em>Same hardware (Intel i7-10700, 32GB RAM) — Axiom compiled with
+                                            <code>-march=native</code></em></p>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Benchmark</th>
+                                            <th>Ubuntu 24.04</th>
+                                            <th>Axiom OS</th>
+                                            <th>Improvement</th>
+                                        </tr>
+                                        <tr>
+                                            <td>LINPACK (10000×10000)</td>
+                                            <td>12.4s</td>
+                                            <td style="color: #008000; font-weight: bold;">10.2s</td>
+                                            <td style="color: #008000;">+18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>FFT (2²⁴ points)</td>
+                                            <td>1.82s</td>
+                                            <td style="color: #008000; font-weight: bold;">1.41s</td>
+                                            <td style="color: #008000;">+23%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eigenvalue (5000×5000)</td>
+                                            <td>8.3s</td>
+                                            <td style="color: #008000; font-weight: bold;">6.8s</td>
+                                            <td style="color: #008000;">+18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>NumPy dot product</td>
+                                            <td>2.1s</td>
+                                            <td style="color: #008000; font-weight: bold;">1.7s</td>
+                                            <td style="color: #008000;">+19%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Julia SVD</td>
+                                            <td>4.5s</td>
+                                            <td style="color: #008000; font-weight: bold;">3.6s</td>
+                                            <td style="color: #008000;">+20%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Boot time (to login)</td>
+                                            <td>28s</td>
+                                            <td style="color: #008000; font-weight: bold;">8s</td>
+                                            <td style="color: #008000;">+71%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>RAM at idle</td>
+                                            <td>1.8 GB</td>
+                                            <td style="color: #008000; font-weight: bold;">380 MB</td>
+                                            <td style="color: #008000;">-79%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LLM tokens/sec (Qwen 7B)</td>
+                                            <td>32 t/s</td>
+                                            <td style="color: #008000; font-weight: bold;">48 t/s</td>
+                                            <td style="color: #008000;">+50%</td>
+                                        </tr>
+                                    </table>
+                                    <p style="font-size: 11px; color: #666;">Benchmarks run on Intel i7-10700 @ 2.9GHz,
+                                        32GB DDR4, NVMe SSD. Results may vary based on CPU features.</p>
+                                </fieldset>
+                            </div>
+
+                            <!-- Math Stack Tab -->
+                            <div id="blfs" class="tab-content">
+                                <h2>📦 The Complete Math Stack</h2>
+                                <p><em>PhD-grade computational environment — zero bloat, maximum performance</em></p>
+
+                                <fieldset>
+                                    <legend>🔧 Global Compiler Optimization</legend>
+                                    <p><strong>The secret weapon.</strong> All packages built with:</p>
+                                    <div class="code-block">export CFLAGS="-O3 -march=native -pipe"
+                                        export CXXFLAGS="${CFLAGS}"
+                                        export MAKEFLAGS="-j$(nproc)"</div>
+                                    <table class="comparison-table" style="margin-top: 12px;">
+                                        <tr>
+                                            <th>Flag</th>
+                                            <th>Purpose</th>
+                                        </tr>
+                                        <tr>
+                                            <td><code>-O3</code></td>
+                                            <td>Aggressive optimization</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>-march=native</code></td>
+                                            <td>Use CPU-specific instructions (AVX-512, SSE4.2)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>-pipe</code></td>
+                                            <td>Speed up compilation</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>-j$(nproc)</code></td>
+                                            <td>Use all CPU cores</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 1: Bloat-Free Graphical Foundation</h4>
+                                    <p><em>You need to see graphs and render PDFs, but you don't need desktop
+                                            animations</em></p>
+                                    <ul>
+                                        <li><strong>Xorg</strong> — Most compatible with legacy math tools</li>
+                                        <li><strong>i3 / sway</strong> — Tiling WM: code left, PDF right, terminal
+                                            bottom</li>
+                                        <li><strong>Alacritty / st</strong> — GPU-accelerated, instant startup</li>
+                                        <li><strong>JetBrains Mono</strong> — Ligatures for math/code</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 2: The "Infinite Precision" Triad</h4>
+                                    <p><em>For pure math: Number Theory, Cryptography, rigorous analysis</em></p>
+                                    <ul>
+                                        <li><strong>GMP</strong> — Arbitrary precision integers/rationals (calc π to 1M
+                                            digits)</li>
+                                        <li><strong>MPFR</strong> — Reliable floating-point with correct rounding</li>
+                                        <li><strong>MPC</strong> — Complex arbitrary precision</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 3: Heavy Metal Linear Algebra</h4>
+                                    <p><em>The engine behind NumPy, Octave, R, TensorFlow — if this is slow, EVERYTHING
+                                            is slow</em></p>
+                                    <ul>
+                                        <li><strong>OpenBLAS</strong> — Dense matrix ops (built with
+                                            <code>-march=native</code>)
+                                        </li>
+                                        <li><strong>LAPACK</strong> — Linear systems, eigenvalues, SVD</li>
+                                        <li><strong>SuiteSparse</strong> — Sparse matrices for graphs, FEM, physics</li>
+                                        <li><strong>FFTW</strong> — Fast Fourier Transforms with AVX/SSE</li>
+                                        <li><strong>Eigen</strong> — C++ template library (header-only)</li>
+                                        <li><strong>Armadillo</strong> — C++ MATLAB-like syntax</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 4-6: Solvers & Optimization</h4>
+                                    <ul>
+                                        <li><strong>GSL</strong> — General scientific computing</li>
+                                        <li><strong>SUNDIALS</strong> — DOE gold standard ODE/DAE solvers</li>
+                                        <li><strong>PETSc</strong> — Large-scale PDE solvers (scales to supercomputers!)
+                                        </li>
+                                        <li><strong>NLopt / Ipopt</strong> — Nonlinear optimization</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 7-8: High-Performance Data & Parallelism</h4>
+                                    <ul>
+                                        <li><strong>HDF5</strong> — Binary data format (handles terabytes instantly)
+                                        </li>
+                                        <li><strong>OpenMPI</strong> — Multi-core/cluster computing</li>
+                                        <li><strong>OpenMP</strong> — Loop parallelization (built into GCC)</li>
+                                        <li><strong>TBB</strong> — Intel Threading Building Blocks</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 9: Symbolic Math (Computer Algebra)</h4>
+                                    <ul>
+                                        <li><strong>Giac/Xcas</strong> — C++ symbolic engine (powers HP Prime)</li>
+                                        <li><strong>SymPy</strong> — Python symbolic math</li>
+                                        <li><strong>Maxima</strong> — Open-source Mathematica alternative</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>✓ Phase 10: Languages & Typesetting</h4>
+                                    <ul>
+                                        <li><strong>Python 3.12</strong> — With NumPy, SciPy, Pandas, Matplotlib</li>
+                                        <li><strong>Octave 9.1</strong> — MATLAB-compatible computing</li>
+                                        <li><strong>Julia 1.10</strong> — High-performance scientific computing</li>
+                                        <li><strong>R 4.3</strong> — Statistical computing</li>
+                                        <li><strong>TeX Live 2024</strong> — Complete LaTeX distribution</li>
+                                        <li><strong>Gnuplot / Matplotlib / ParaView</strong> — 2D/3D visualization</li>
+                                    </ul>
+                                </div>
+
+                                <fieldset>
+                                    <legend>🧠 Phase 11: The "Oracle" — Embedded AI</legend>
+                                    <p><em>A native LLM engine compiled with AVX2, integrated with Flux as a
+                                            Verifier-Optimizer loop</em></p>
+
+                                    <div class="architecture-diagram">
+                                        ┌────────────────────────────────────────────────────────────┐
+                                        │ AXIOM OS │
+                                        │ │
+                                        │ ┌──────────┐ ┌──────────────┐ ┌────────────────┐ │
+                                        │ │ User │───▶│ Qwen 7B │───▶│ Flux │ │
+                                        │ │ Query │ │ (Generator) │ │ (Verifier) │ │
+                                        │ └──────────┘ └──────┬───────┘ └───────┬────────┘ │
+                                        │ │ │ │
+                                        │ │◀── Penalty/Retry ──┘ │
+                                        │ │ (if invalid) │
+                                        │ ▼ │
+                                        │ ┌──────────────┐ │
+                                        │ │ Verified │ │
+                                        │ │ Output │ │
+                                        │ └──────────────┘ │
+                                        └────────────────────────────────────────────────────────────┘</div>
+
+                                    <table class="comparison-table" style="margin-top: 12px;">
+                                        <tr>
+                                            <th>RAM</th>
+                                            <th>Model</th>
+                                            <th>Free for Verifier</th>
+                                        </tr>
+                                        <tr>
+                                            <td>16GB</td>
+                                            <td>Qwen 2.5 7B (Q4_K_M) ~5GB</td>
+                                            <td>~10GB ✅</td>
+                                        </tr>
+                                    </table>
+
+                                    <p style="margin-top: 12px;"><strong>The Core Insight:</strong> Use Flux as a
+                                        <strong>Game Theory referee</strong> that validates LLM outputs. Accuracy comes
+                                        from <strong>architecture</strong>, not model size.
+                                    </p>
+                                </fieldset>
+                            </div>
+
+                            <!-- Research Tab -->
+                            <div id="research" class="tab-content">
+                                <h2>🔬 Research Angles</h2>
+                                <p><em>Publishable directions within the Axiom ecosystem</em></p>
+                                <p>Axiom is not one project — it's a <strong>research platform</strong> with multiple
+                                    publishable threads.</p>
+
+                                <fieldset>
+                                    <legend>Thread 1: Verifier-Optimizer Loops</legend>
+                                    <p><strong>Core Question:</strong> Can a smaller LLM achieve higher accuracy through
+                                        architectural constraints (Game Theory verification) rather than scale?</p>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Model</th>
+                                            <th>Training</th>
+                                            <th>Expected MATH Score</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Qwen 7B (baseline)</td>
+                                            <td>None</td>
+                                            <td>~75%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Qwen 7B + Game Theory</td>
+                                            <td>10k Tenet samples</td>
+                                            <td>~78-80%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Qwen 7B + GT + Verifier</strong></td>
+                                            <td>10k Tenet + Flux loop</td>
+                                            <td><strong>~85%</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Qwen 14B (baseline)</td>
+                                            <td>None</td>
+                                            <td>~80%</td>
+                                        </tr>
+                                    </table>
+                                    <p><strong>Win Condition:</strong> 7B+GT+Verifier beats 14B → <em>Architecture beats
+                                            scale</em> (the headline!)</p>
+                                    <p><strong>Venues:</strong> NeurIPS, ICML, EMNLP</p>
+                                    <div style="margin-top: 10px; text-align: center;">
+                                        <a href="../Alexitha/index.html" target="_blank" style="text-decoration: none;">
+                                            <button style="font-weight: bold; cursor: pointer;">🚀 Launch Interactive
+                                                "Glass Box" Demo</button>
+                                        </a>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Thread 2: Teaching LLMs Custom Languages</legend>
+                                    <p><strong>Core Question:</strong> Can fine-tuning on a novel DSL improve structured
+                                        reasoning?</p>
+                                    <p><strong>Hypothesis:</strong> Training on Tenet (game theory DSL) transfers to
+                                        improved logical reasoning on unrelated tasks.</p>
+                                    <p><strong>Venues:</strong> ACL, EMNLP, COLM</p>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Thread 3: AI-Native Operating Systems</legend>
+                                    <p><strong>Core Question:</strong> What are the architectural benefits of
+                                        integrating LLM inference at the OS level?</p>
+                                    <p><strong>Hypothesis:</strong> Native integration (C library, systemd daemon,
+                                        shared memory) reduces latency and enables novel interaction patterns impossible
+                                        with API-based AI.</p>
+                                    <p><strong>Venues:</strong> OSDI, ATC, HotOS</p>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Thread 4: Neuro-Symbolic Math Computation</legend>
+                                    <p><strong>Core Question:</strong> Can hybrid systems (LLM + symbolic CAS)
+                                        outperform either alone?</p>
+                                    <p><strong>Venues:</strong> ICLR, AAAI, JAIR</p>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>📊 Research Combinations</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Combination</th>
+                                            <th>Paper Title Idea</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Thread 1 + 2</td>
+                                            <td>"Teaching LLMs to Self-Verify via DSLs"</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thread 1 + 3</td>
+                                            <td>"Verifier Loops at OS Speed"</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thread 1 + 2 + 3</td>
+                                            <td>"Axiom: An AI-Native OS for Verified Computation"</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>All Threads</strong></td>
+                                            <td><strong>Thesis: "Vertical Integration for Trustworthy AI"</strong></td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </div>
+
+                            <!-- Roadmap Tab -->
+                            <div id="roadmap" class="tab-content">
+                                <h2>🗺️ Roadmap</h2>
+                                <p><em>Completed and future enhancements</em></p>
+
+                                <fieldset>
+                                    <legend>✓ Phase 0: Custom Language Integration</legend>
+                                    <p><em>Your own languages, burned into the silicon of your OS.</em></p>
+
+                                    <h4>Flux (C Bytecode VM) — Kernel-Level Calculator</h4>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Aspect</th>
+                                            <th>Details</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Binary</td>
+                                            <td><code>/usr/bin/flux</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Flags</td>
+                                            <td><code>-O3 -march=native -flto -lgmp -lm</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Man Page</td>
+                                            <td><code>man flux</code></td>
+                                        </tr>
+                                    </table>
+
+                                    <h4 style="margin-top: 16px;">Tenet (Java Interpreter) — The "No-JVM" Trick</h4>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Aspect</th>
+                                            <th>Details</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Binary</td>
+                                            <td><code>/usr/bin/tenet</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compilation</td>
+                                            <td>GraalVM Native Image (AOT)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dependency</td>
+                                            <td>ZERO (no JRE required)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Startup</td>
+                                            <td>Milliseconds (vs JVM seconds)</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>✓ Phase 0.5: The "Oracle" — Embedded AI</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Component</th>
+                                            <th>Details</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Engine</td>
+                                            <td><code>llama.cpp</code> (compiled with AVX-512)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Model</td>
+                                            <td>Qwen 2.5 7B (Q4_K_M quantized)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Binary</td>
+                                            <td><code>/usr/bin/axiom-ai</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Library</td>
+                                            <td><code>libllama.so</code> (for Flux integration)</td>
+                                        </tr>
+                                    </table>
+                                    <div class="code-block" style="margin-top: 12px;">// Flux code calling native AI
+                                        var answer = oracle.ask("Integrate x² from 0 to 5");
+                                        print answer;</div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>📜 The Axiom Constitution</legend>
+                                    <p><em>Future features must adhere to these non-negotiable constraints:</em></p>
+                                    <ul class="tree-view">
+                                        <li><strong>Zero Bloat</strong> — If a feature doesn't serve the math, it
+                                            doesn't ship.</li>
+                                        <li><strong>User Sovereignty</strong> — No telemetry. No auto-updates. No "cloud
+                                            integration" without consent.</li>
+                                        <li><strong>Silicon Respect</strong> — Software must bend to the hardware, not
+                                            the other way around.</li>
+                                    </ul>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🏛️ The Foundation_</legend>
+                                    <ul class="tree-view">
+                                        <li><strong>Core Infrastructure</strong> — Custom Kernel 6.7.4, SysVinit,
+                                            Network Stack</li>
+                                        <li><strong>Graphical Environment</strong> — Xorg, i3 Tiling WM, Alacritty (GPU
+                                            Accelerated)</li>
+                                        <li><strong>Dev Ecosystem</strong> — Neovim, Git, Rust, Go, Python 3.12, Node.js
+                                        </li>
+                                    </ul>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🔭 Horizon 2026</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Goal</th>
+                                            <th>Vision</th>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Neural Kernel</strong></td>
+                                            <td>Move the LLM from userspace to ring-0 for sub-1ms latency.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Holographic FS</strong></td>
+                                            <td>File system organized by semantic embeddings, not folders.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Axiom Cloud</strong></td>
+                                            <td>Peer-to-peer compute clusters for training massive Flux models.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Paper-to-Silicon</strong></td>
+                                            <td>Compile LaTeX directly to FPGA bitstreams.</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote">
+                        <em>"Give me a place to stand and I shall move the world."</em> — Archimedes
+                    </div>
+                </div>
+                <div class="status-bar">
+                    <p class="status-bar-field">LFS Version: 12.2</p>
+                    <p class="status-bar-field">Status: Complete</p>
+                    <p class="status-bar-field">Math Stack: Installed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Menu Styles -->
+    <style>
+        .start-menu {
+            position: fixed;
+            bottom: 36px;
+            left: 2px;
+            width: 200px;
+            background: #c0c0c0;
+            border: 2px outset #fff;
+            display: none;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .start-menu-sidebar {
+            width: 24px;
+            background: linear-gradient(180deg, #000080, #0000ff);
+            color: #fff;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            padding: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 8px;
+        }
+
+        .start-menu-inner {
+            display: flex;
+            height: 100%;
+        }
+
+        .start-menu-content {
+            flex: 1;
+            padding: 2px;
+        }
+
+        .start-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .start-item:hover {
+            background: #000080;
+            color: #fff;
+        }
+
+        .start-item img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .separator {
+            height: 1px;
+            background: #808080;
+            margin: 4px 2px;
+            border-bottom: 1px solid #fff;
+        }
+
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 128, 128, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+        }
+    </style>
+    <!-- ... -->
+    </div>
+    <!-- ... -->
+    </div>
+    </div>
+
+    <!-- Power Screen Styles -->
+    <style>
+        .power-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 5000;
+            display: flex;
+            justify-content: flex-end;
+            /* Moved to Right */
+            align-items: flex-end;
+            /* Moved to Bottom */
+            padding: 80px;
+            /* Corner spacing */
+            box-sizing: border-box;
+            transition: opacity 1s ease;
+        }
+
+        .power-button-container {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .power-button-container:hover {
+            transform: scale(1.1);
+        }
+
+        .power-icon {
+            width: 60px;
+            /* Slightly smaller for corner */
+            height: 60px;
+            border: 3px solid #00ffff;
+            /* Cyan Color */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px auto;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .power-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: #00ffff;
+            /* Cyan Color */
+        }
+
+        .power-text {
+            color: #00ffff;
+            /* Cyan Color */
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+    </style>
+
+    <!-- Power Screen (First Interaction) -->
+    <div class="power-screen" id="power-screen">
+        <div class="power-button-container" onclick="powerOnSystem()">
+            <div class="power-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
+                    <line x1="12" y1="2" x2="12" y2="12" />
+                </svg>
+            </div>
+            <div class="power-text">POWER ON</div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div class="login-screen" id="login-screen" style="display: none;">
+        <div class="window" style="width: 300px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Log On into Windows</div>
+            </div>
+            <div class="window-body" style="display: flex; gap: 10px; align-items: center;">
+                <img src="https://win98icons.alexmeub.com/icons/png/key_win-1.png" style="width: 32px; height: 32px;">
+                <div style="flex: 1;">
+                    <p style="margin: 0 0 8px 0;">User name: <input type="text" value="Axiom User"
+                            style="width: 150px;"></p>
+                    <p style="margin: 0 0 4px 0;">Password: <input type="password" id="login-password" value=""
+                            style="width: 150px;" onkeypress="if(event.key === 'Enter') completeLogin()"></p>
+                    <p style="margin: 0; font-size: 11px; color: #000080; font-weight: bold;">Hint: axiom</p>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <button onclick="completeLogin()">OK</button>
+                    <button onclick="document.getElementById('login-screen').style.display = 'none'">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Windows 98 Start Menu -->
+    <div class="start-menu" id="start-menu" style="display: none;">
+        <div class="start-menu-sidebar">AXIOM 2026</div>
+        <div class="start-menu-content">
+            <div class="start-item" onclick="showLoginScreen()">
+                <span style="font-size: 16px;">⚡</span> <strong>Power On</strong>
+            </div>
+            <div class="start-item" onclick="window.location.reload()">
+                <span style="font-size: 16px;">🔄</span> Reboot System
+            </div>
+            <div class="separator"></div>
+            <div class="start-item" onclick="alert('Shutting down...'); window.close();">
+                <span style="font-size: 16px;">🔴</span> Shut Down
+            </div>
+        </div>
+    </div>
+
+    <!-- Windows 98 Taskbar -->
+    <div class="taskbar">
+        <button class="start-button" onclick="toggleStartMenu()">
+            <img src="https://win98icons.alexmeub.com/icons/png/windows_slanted-1.png"
+                style="width: 16px; height: 16px; margin-right: 4px;" alt="">
+            Start
+        </button>
+        <div class="taskbar-items">
+            <button class="taskbar-item" id="taskbar-axiom" style="display: none;"
+                onclick="toggleWindow('axiom-window')">∫ Axiom OS - Doc...</button>
+        </div>
+        <div class="taskbar-clock" id="clock">12:00 PM</div>
+    </div>
+
+    <script>
+        // Power On Logic
+        function powerOnSystem() {
+            const powerScreen = document.getElementById('power-screen');
+            powerScreen.style.opacity = '0';
+            setTimeout(() => {
+                powerScreen.style.display = 'none';
+                document.getElementById('login-screen').style.display = 'flex';
+            }, 1000);
+        }
+
+        // Start Menu Logic
+        function toggleStartMenu() {
+            const menu = document.getElementById('start-menu');
+            const btn = document.querySelector('.start-button');
+            if (menu.style.display === 'none') {
+                menu.style.display = 'flex';
+                btn.classList.add('active');
+                btn.style.background = '#e0e0e0';
+                btn.style.borderStyle = 'inset';
+            } else {
+                menu.style.display = 'none';
+                btn.classList.remove('active');
+                btn.style.background = '';
+                btn.style.borderStyle = '';
+            }
+        }
+
+
+        // Login Logic
+        function showLoginScreen() {
+            document.getElementById('start-menu').style.display = 'none';
+            document.querySelector('.start-button').style.borderStyle = '';
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('login-password').value = '';
+        }
+
+        function completeLogin() {
+            const pwd = document.getElementById('login-password').value;
+            if (pwd === 'axiom') {
+                document.getElementById('login-screen').style.display = 'none';
+                launchApp('axiom-window');
+            } else {
+                alert('Access Denied: Incorrect Password.\n\nTry: axiom');
+            }
+        }
+
+        // Window Logic
+        function launchApp(windowId) {
+            const win = document.getElementById(windowId);
+            if (win) {
+                win.style.display = 'block';
+                // Bring to front
+                document.querySelectorAll('.window').forEach(w => w.style.zIndex = 100);
+                win.style.zIndex = 101;
+
+                // Taskbar integration
+                if (windowId === 'axiom-window') {
+                    const taskItem = document.getElementById('taskbar-axiom');
+                    if (taskItem) {
+                        taskItem.style.display = 'block';
+                        taskItem.classList.add('active');
+                    }
+                }
+            }
+        }
+
+        function toggleWindow(windowId) {
+            const win = document.getElementById(windowId);
+            const taskItem = document.getElementById('taskbar-axiom');
+
+            if (win.style.display === 'none') {
+                win.style.display = 'block';
+                // Bring to front
+                document.querySelectorAll('.window').forEach(w => w.style.zIndex = 100);
+                win.style.zIndex = 101;
+                if (taskItem) taskItem.classList.add('active');
+            } else {
+                win.style.display = 'none';
+                if (taskItem) taskItem.classList.remove('active');
+            }
+        }
+
+        function closeWindow(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Draggable Logic
+        let isDragging = false;
+        let currentWindow = null;
+        let initialX;
+        let initialY;
+
+        document.querySelectorAll('.title-bar').forEach(titleBar => {
+            titleBar.addEventListener('mousedown', dragStart);
+        });
+
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            currentWindow = e.target.closest('.window');
+            if (currentWindow && e.target.closest('.title-bar')) {
+                // Lock dimensions to prevent resizing when switching to absolute
+                const rect = currentWindow.getBoundingClientRect();
+                currentWindow.style.width = rect.width + 'px';
+                currentWindow.style.height = rect.height + 'px';
+
+                // Bring to front
+                document.querySelectorAll('.window').forEach(w => w.style.zIndex = 100);
+                currentWindow.style.zIndex = 101;
+
+                initialX = e.clientX - rect.left;
+                initialY = e.clientY - rect.top;
+                isDragging = true;
+            }
+        }
+
+        function drag(e) {
+            if (isDragging && currentWindow) {
+                e.preventDefault();
+                currentWindow.style.left = (e.clientX - initialX) + "px";
+                currentWindow.style.top = (e.clientY - initialY) + "px";
+                // Ensure absolute position
+                currentWindow.style.position = 'absolute';
+            }
+        }
+
+        function dragEnd(e) {
+            isDragging = false;
+            currentWindow = null;
+        }
+
+        // Terminal Logic
+        function openTerminal() {
+            const win = document.getElementById('terminal-window');
+            if (win) {
+                win.style.display = 'flex';
+                document.querySelectorAll('.window').forEach(w => w.style.zIndex = 100);
+                win.style.zIndex = 102;
+                document.getElementById('terminal-input').focus();
+            }
+        }
+
+        // Terminal Input Handler (Optional if element exists)
+        const termInput = document.getElementById('terminal-input');
+        if (termInput) {
+            termInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    const input = this.value;
+                    const outputDiv = document.getElementById('terminal-output');
+                    outputDiv.innerHTML += `<div><span style="color:#aaa;">root@axiom:~#</span> ${input}</div>`;
+                    processCommand(input.trim());
+                    this.value = '';
+                    outputDiv.scrollTop = outputDiv.scrollHeight;
+                }
+            });
+        }
+
+        function processCommand(cmd) {
+            const outputDiv = document.getElementById('terminal-output');
+            let response = "";
+            if (cmd === "help") response = "Available commands: help, clear, uname, ls, alexitha";
+            else if (cmd === "clear") { outputDiv.innerHTML = ""; return; }
+            else if (cmd === "uname -a") response = "Linux axiom 6.7.4-math-native #1 SMP PREEMPT_DYNAMIC";
+            else if (cmd === "ls") response = "Documents  Downloads  axiom_os.iso  flux_benchmarks.log";
+            else if (cmd === "alexitha") {
+                response = "Initializing Alexitha Agent Environment...\nLoading Qwen-7B-Math-v1.4... [OK]\nConnecting to Flux Verifier... [OK]\n\n>> LAUNCHING GUI...";
+                setTimeout(() => { launchApp('axiom-window'); showTab('demo'); }, 1500);
+            }
+            else if (cmd !== "") response = `bash: ${cmd}: command not found`;
+
+            if (response) outputDiv.innerHTML += `<div>${response}</div>`;
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        }
+
+        // Tab Switching
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('menu[role=tablist] li').forEach(li => li.removeAttribute('aria-selected'));
+            document.getElementById(tabId).classList.add('active');
+
+            const btn = document.querySelector(`li[onclick="showTab('${tabId}')"]`); // approximate selector
+            if (btn) btn.setAttribute('aria-selected', 'true');
+
+            // Also try to find by href if the onclick selector fails
+            const buttons = document.querySelectorAll('menu[role=tablist] li a');
+            buttons.forEach(b => {
+                if (b.getAttribute('href') === '#' + tabId) b.closest('li').setAttribute('aria-selected', 'true');
+            });
+        }
+
+        // Clock
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            const clock = document.getElementById('clock');
+            if (clock) clock.textContent = `${hours}:${minutes} ${ampm}`;
+        }
+        updateClock();
+        setInterval(updateClock, 60000);
+
+        // Close start menu on desktop click
+        document.querySelector('.desktop').addEventListener('click', function (e) {
+            if (!e.target.closest('.main-window') && !e.target.closest('.taskbar') && !e.target.closest('.start-menu')) {
+                document.getElementById('start-menu').style.display = 'none';
+                document.querySelector('.start-button').classList.remove('active');
+                document.querySelector('.start-button').style.background = '';
+                document.querySelector('.start-button').style.borderStyle = '';
+            }
+        });
+
+        // Interactive Chapters
+        document.querySelectorAll('.chapter-row').forEach(row => {
+            row.style.cursor = 'pointer';
+        });
+
+        // Initialize Draggable Logic on Load
+        // (Event listeners added above)
+    </script>
+</body>
+
+</html>

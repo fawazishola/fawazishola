@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Nuked My Hard Drive to Build a Math-Native Operating System | Medium</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Georgia&family=Lucida+Grande&family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Sohne:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #242424;
+            --secondary-text: #6b6b6b;
+            --link-color: #1a8917;
+            --border-color: #e6e6e6;
+            --bg-color: #fff;
+            --code-bg: #f9f9f9;
+            --highlight-bg: #fffde7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Serif Pro', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation Bar */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .medium-logo {
+            font-family: 'Sohne', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            letter-spacing: -1px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            border-radius: 20px;
+            padding: 8px 16px;
+            gap: 8px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 180px;
+        }
+
+        .search-icon {
+            color: var(--secondary-text);
+            font-size: 18px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--secondary-text);
+            text-decoration: none;
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-text);
+        }
+
+        .write-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary-text);
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .get-started-btn {
+            background: #1a8917;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Sohne', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Article Container */
+        .article-container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        /* Author Info */
+        .author-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Sohne', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-family: 'Sohne', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--primary-text);
+        }
+
+        .author-name:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .follow-btn {
+            color: var(--link-color);
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .article-meta {
+            font-family: 'Sohne', sans-serif;
+            font-size: 13px;
+            color: var(--secondary-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Article Title */
+        .article-title {
+            font-family: 'Sohne', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            color: var(--primary-text);
+        }
+
+        .article-subtitle {
+            font-size: 22px;
+            color: var(--secondary-text);
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        /* Article Actions */
+        .article-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+
+        .action-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary-text);
+            font-family: 'Sohne', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .action-item:hover {
+            color: var(--primary-text);
+        }
+
+        .clap-icon {
+            font-size: 24px;
+        }
+
+        .action-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .image-caption {
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            color: var(--secondary-text);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Article Content */
+        .article-content {
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .article-content p {
+            margin-bottom: 28px;
+        }
+
+        .article-content h2 {
+            font-family: 'Sohne', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 48px 0 20px 0;
+            letter-spacing: -0.3px;
+        }
+
+        .article-content h3 {
+            font-family: 'Sohne', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 36px 0 16px 0;
+        }
+
+        .article-content strong {
+            font-weight: 600;
+        }
+
+        .article-content em {
+            font-style: italic;
+        }
+
+        .article-content a {
+            color: var(--primary-text);
+            text-decoration: underline;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid var(--primary-text);
+            padding-left: 20px;
+            margin: 32px 0;
+            font-style: italic;
+            color: var(--secondary-text);
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 24px 0;
+            padding-left: 32px;
+        }
+
+        .article-content li {
+            margin-bottom: 12px;
+        }
+
+        .article-content code {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 17px;
+        }
+
+        .article-content pre {
+            background: #292929;
+            color: #e6e6e6;
+            padding: 20px 24px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 28px 0;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .article-content pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .highlight {
+            background: var(--highlight-bg);
+            padding: 2px 4px;
+        }
+
+        .drop-cap::first-letter {
+            font-size: 64px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 12px;
+            margin-top: 4px;
+            font-family: 'Sohne', sans-serif;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: #f9f9f9;
+            border-left: 4px solid #1a8917;
+            padding: 20px 24px;
+            margin: 32px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout-title {
+            font-family: 'Sohne', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        /* Stats Table */
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0;
+            font-family: 'Sohne', sans-serif;
+            font-size: 16px;
+        }
+
+        .stats-table th,
+        .stats-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stats-table th {
+            background: #f9f9f9;
+            font-weight: 600;
+        }
+
+        .stats-table tr:hover {
+            background: #fafafa;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 48px 0;
+        }
+
+        .tag {
+            background: #f2f2f2;
+            color: var(--secondary-text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Sohne', sans-serif;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .tag:hover {
+            background: #e6e6e6;
+        }
+
+        /* Clap Section */
+        .clap-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 48px;
+        }
+
+        .clap-button {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .clap-button:hover {
+            border-color: var(--primary-text);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .clap-button.clapped {
+            background: #1a8917;
+            border-color: #1a8917;
+        }
+
+        .clap-count {
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            color: var(--secondary-text);
+        }
+
+        /* Author Footer */
+        .author-footer {
+            display: flex;
+            gap: 16px;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .author-footer-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Sohne', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        .author-footer-info h3 {
+            font-family: 'Sohne', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .author-footer-info p {
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .follow-button {
+            background: #1a8917;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Sohne', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .follow-button:hover {
+            background: #0d7d0d;
+        }
+
+        /* Responses Section */
+        .responses-section {
+            padding: 32px 0;
+        }
+
+        .responses-header {
+            font-family: 'Sohne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        /* Separator */
+        .separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 16px;
+            color: var(--secondary-text);
+        }
+
+        .separator-dot {
+            font-size: 24px;
+        }
+
+        /* Animation for clap */
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .clap-button.animate {
+            animation: pop 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .article-container {
+                padding: 24px 16px;
+            }
+
+            .article-title {
+                font-size: 32px;
+            }
+
+            .article-subtitle {
+                font-size: 18px;
+            }
+
+            .article-content {
+                font-size: 18px;
+            }
+
+            .nav-right .nav-link,
+            .search-box {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-left">
+            <div class="medium-logo">Medium</div>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="write-btn">
+                <span>✍️</span>
+                Write
+            </a>
+            <a href="#" class="nav-link">Sign in</a>
+            <button class="get-started-btn">Get started</button>
+        </div>
+    </nav>
+
+    <!-- Article Container -->
+    <article class="article-container">
+        <!-- Author Section -->
+        <div class="author-section">
+            <div class="author-avatar">F</div>
+            <div class="author-info">
+                <div>
+                    <span class="author-name">Fawaz Olatunde</span>
+                    <span class="follow-btn">· Follow</span>
+                </div>
+                <div class="article-meta">
+                    <span>12 min read</span>
+                    <span>·</span>
+                    <span>Dec 25, 2024</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Title -->
+        <h1 class="article-title">Why I Nuked My Hard Drive to Build a Math-Native Operating System</h1>
+        <p class="article-subtitle">How compiling 200+ packages from source taught me more about computing than any CS
+            degree ever could</p>
+
+        <!-- Article Actions -->
+        <div class="article-actions">
+            <div class="action-left">
+                <div class="action-item" onclick="clap(this)">
+                    <span class="clap-icon">👏</span>
+                    <span class="clap-number">2.4K</span>
+                </div>
+                <div class="action-item">
+                    <span>💬</span>
+                    <span>89</span>
+                </div>
+            </div>
+            <div class="action-right">
+                <div class="action-item">
+                    <span>🔖</span>
+                </div>
+                <div class="action-item">
+                    <span>📤</span>
+                </div>
+                <div class="action-item">
+                    <span>⋯</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Image -->
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630' fill='%23121212'%3E%3Crect width='1200' height='630' fill='%23121212'/%3E%3Ctext x='50%25' y='40%25' dominant-baseline='middle' text-anchor='middle' font-family='Monaco, monospace' font-size='72' fill='%2310b981'%3E∫∞ AXIOM%3C/text%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Monaco, monospace' font-size='24' fill='%236b7280'%3EMath-Native Linux Workstation%3C/text%3E%3Ctext x='50%25' y='75%25' dominant-baseline='middle' text-anchor='middle' font-family='Monaco, monospace' font-size='16' fill='%234b5563'%3E$ ./configure %26%26 make %26%26 make install%3C/text%3E%3C/svg%3E"
+            alt="Axiom OS Logo" class="featured-image">
+        <p class="image-caption">The moment everything starts to make sense.</p>
+
+        <!-- Article Content -->
+        <div class="article-content">
+            <p class="drop-cap">It was 2 AM on a Tuesday when I finally committed to the most unhinged decision of my
+                technical life: formatting my only computer to build an operating system from literal source code.</p>
+
+            <p>Not installing Linux. Not dual-booting. <strong>Building</strong> it. Every package. Every library. Every
+                binary — compiled from scratch on my machine, optimized for my exact CPU.</p>
+
+            <p>The project is called <strong>Axiom</strong>. It's a custom Linux workstation built entirely from source,
+                optimized for mathematical and scientific computing. And yes, I built it following the legendary <a
+                    href="https://www.linuxfromscratch.org/">Linux From Scratch</a> book.</p>
+
+            <blockquote>"But you can just install Ubuntu or Arch. Why would anyone do this?"</blockquote>
+
+            <p>That's exactly what I thought too. Until I understood the difference between running a computer and
+                <em>understanding</em> a computer.
+            </p>
+
+            <h2>The Problem With "Normal" Linux</h2>
+
+            <p>Here's a dirty secret about standard Linux distributions: they're built for <em>everyone</em>. And when
+                you build for everyone, you optimize for no one.</p>
+
+            <table class="stats-table">
+                <tr>
+                    <th>Standard Distro</th>
+                    <th>Axiom (Math-Native)</th>
+                </tr>
+                <tr>
+                    <td>Generic binaries (<code>-march=x86-64</code>)</td>
+                    <td>CPU-optimized (<code>-march=native</code>)</td>
+                </tr>
+                <tr>
+                    <td>Bloated desktop (GNOME/KDE)</td>
+                    <td>Minimal tiling WM (i3)</td>
+                </tr>
+                <tr>
+                    <td>Generic BLAS/LAPACK</td>
+                    <td>OpenBLAS tuned for exact CPU</td>
+                </tr>
+                <tr>
+                    <td>Desktop animations eating cycles</td>
+                    <td>Every cycle goes to computation</td>
+                </tr>
+            </table>
+
+            <p>When you install NumPy on Ubuntu, it links against a generic BLAS library compiled to run on any x86
+                processor from the last 20 years. It can't use your AVX-512 instructions. It can't use your specific
+                cache sizes. It's leaving performance on the table.</p>
+
+            <p>But when you compile OpenBLAS from source with <code>-march=native</code>? Your CPU's vector instructions
+                light up like a Christmas tree.</p>
+
+            <h2>What I Actually Built</h2>
+
+            <p>Let me walk you through the madness. Axiom isn't just "a computer that boots." It's a 10-phase stack
+                designed for PhD-grade computational work:</p>
+
+            <h3>Phase 1: The Vision</h3>
+
+            <p>Before writing a single line of code, I asked myself: <em>What would a mathematician's dream workstation
+                    look like?</em></p>
+
+            <ul>
+                <li><strong>No bloat.</strong> No games, no office suites, no web browser, no audio/video nonsense.</li>
+                <li><strong>Every byte justified.</strong> If it's installed, it serves the mission.</li>
+                <li><strong>Native performance.</strong> CPU-specific optimizations everywhere.</li>
+            </ul>
+
+            <h3>Phase 2: The "Infinite Precision" Triad</h3>
+
+            <p>These three libraries form the bedrock of computational mathematics:</p>
+
+            <ul>
+                <li><strong>GMP</strong> — Arbitrary precision integers and rationals. Calculate π to a million digits.
+                </li>
+                <li><strong>MPFR</strong> — Reliable floating-point with guaranteed correct rounding.</li>
+                <li><strong>MPC</strong> — Complex arbitrary precision, built on GMP + MPFR.</li>
+            </ul>
+
+            <p>Build order matters. GMP → MPFR → MPC. Get them wrong and mysterious segfaults await you at 3 AM.</p>
+
+            <h3>Phase 3: Heavy Metal Linear Algebra</h3>
+
+            <p>This is the engine behind NumPy, Octave, R, TensorFlow — if this layer is slow, <em>everything</em> is
+                slow.</p>
+
+            <pre><code>export CFLAGS="-O3 -march=native -pipe"
+export CXXFLAGS="${CFLAGS}"
+export MAKEFLAGS="-j$(nproc)"</code></pre>
+
+            <p>Those three lines are the secret weapon. <code>-O3</code> for aggressive optimization.
+                <code>-march=native</code> to use your CPU's exact instruction set. <code>-j$(nproc)</code> to use all
+                your cores.
+            </p>
+
+            <div class="callout">
+                <div class="callout-title">⚠️ Critical: OpenBLAS</div>
+                <p>Do NOT install the generic <code>libblas</code> package. Build OpenBLAS from source with your exact
+                    CPU target. This single decision can mean 15–20% faster matrix operations.</p>
+            </div>
+
+            <h3>Phase 4: The "Oracle" — Embedded AI</h3>
+
+            <p>Here's where Axiom gets weird. I'm embedding a local LLM — not through Python or PyTorch, but by
+                compiling <code>llama.cpp</code> from source with native optimizations.</p>
+
+            <p>The model runs at <strong>maximum speed</strong> using my CPU's vector instructions. No Docker. No pip
+                install. Just C++ and math.</p>
+
+            <pre><code>cmake -B build \
+    -DGGML_NATIVE=ON \
+    -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=Release
+
+cmake --build build -j$(nproc)</code></pre>
+
+            <p>A 7B parameter model in 5GB of RAM, running 50+ tokens per second, verified by a custom language I built
+                called <strong>Tenet</strong> that acts as a game-theory referee for LLM outputs.</p>
+
+            <p>But that's a story for another article.</p>
+
+            <h2>The Journey: What They Don't Tell You</h2>
+
+            <p>Linux From Scratch is a 400+ page book. It takes 40–60 hours for a first-timer. And it will break you.
+            </p>
+
+            <h3>The First Kernel Panic</h3>
+
+            <p>At hour 32, I finally had a bootable system. The GRUB menu appeared. The kernel started loading. Then:
+            </p>
+
+            <pre><code>Kernel panic - not syncing: VFS: Unable to mount root fs</code></pre>
+
+            <p>I stared at that message for 20 minutes. Then I opened Chapter 10 again. Then I realized I'd
+                misconfigured my filesystem options in the kernel.</p>
+
+            <p>Four hours later, after recompiling the entire kernel, I watched the login prompt appear.</p>
+
+            <p>I've never felt that kind of satisfaction from <code>apt install</code>.</p>
+
+            <h3>The "Quick" Package That Took 3 Days</h3>
+
+            <p>GCC (the GNU Compiler Collection) is a monster. 4.5 hours to compile on my machine. And when it fails at
+                hour 4, you get to start over.</p>
+
+            <p>The book tracks build time in "SBUs" — Standard Build Units, normalized to how long your first package
+                takes. GCC is 155 SBUs. That's not a typo.</p>
+
+            <blockquote>At some point, you stop seeing packages. You start seeing dependencies. You understand that
+                <code>libc</code> underlies everything. That <code>coreutils</code> is just GNU's implementation of
+                POSIX. That nothing is magic.
+            </blockquote>
+
+            <h2>What I Actually Learned</h2>
+
+            <p>Here's the uncomfortable truth: you don't need to do this. Pre-built binaries work fine. Ubuntu is
+                genuinely excellent. Most developers never need to understand what <code>./configure</code> actually
+                does.</p>
+
+            <p>But if you're the kind of person who <em>needs to know</em>, there's no substitute for building the thing
+                yourself.</p>
+
+            <h3>1. Nothing Is Magic</h3>
+
+            <p>When you've compiled <code>glibc</code> from source, you understand what system calls actually are. When
+                you've built the kernel, you understand what drivers do. When you've linked OpenBLAS, you understand why
+                matrix multiplication can be fast or slow.</p>
+
+            <h3>2. Dependency Hell Is Real (And Navigable)</h3>
+
+            <p>Build order matters. Build flags propagate. One misconfigured library can cascade through your entire
+                stack. But once you understand this, you can <em>debug</em> it — instead of just reinstalling and
+                hoping.</p>
+
+            <h3>3. Performance Is a Choice</h3>
+
+            <p>Every cycle your desktop burns on animations is a cycle not computing your eigenvalues. Axiom has no
+                compositor, no themes, no rounded corners. Just a tiling window manager and the raw power of
+                <code>-march=native</code>.
+            </p>
+
+            <div class="separator">
+                <span class="separator-dot">•</span>
+                <span class="separator-dot">•</span>
+                <span class="separator-dot">•</span>
+            </div>
+
+            <h2>The Stack Today</h2>
+
+            <p>Axiom is an ongoing project. Here's what's running:</p>
+
+            <table class="stats-table">
+                <tr>
+                    <th>Component</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>LFS Base System (Kernel, GCC, Glibc)</td>
+                    <td>✅ Complete</td>
+                </tr>
+                <tr>
+                    <td>Math Precision Triad (GMP, MPFR, MPC)</td>
+                    <td>🔄 In Progress</td>
+                </tr>
+                <tr>
+                    <td>Linear Algebra (OpenBLAS, LAPACK, FFTW)</td>
+                    <td>🔄 In Progress</td>
+                </tr>
+                <tr>
+                    <td>Python + NumPy + SciPy</td>
+                    <td>⬜ Planned</td>
+                </tr>
+                <tr>
+                    <td>Embedded LLM (Alexthia + Tenet)</td>
+                    <td>⬜ Planned</td>
+                </tr>
+            </table>
+
+            <p>The goal is a fully self-contained mathematical workstation — no internet required, no package managers
+                pulling in surprises, just a machine purpose-built for computation.</p>
+
+            <h2>Should You Do This?</h2>
+
+            <p>Probably not. It will consume weeks of your life. It will make you question every choice that led you
+                here. You will stare at boot errors at 4 AM wondering why you didn't just install Fedora.</p>
+
+            <p>But if you're the kind of person who can't sleep until you <em>understand</em>—until you've seen the
+                gears turn—then yes. Build your own OS.</p>
+
+            <p>You'll never look at <code>sudo apt install</code> the same way again.</p>
+
+            <div class="separator">
+                <span class="separator-dot">•</span>
+                <span class="separator-dot">•</span>
+                <span class="separator-dot">•</span>
+            </div>
+
+            <p><em>Axiom is open source. Follow the journey on <a href="#">GitHub</a>. Next up: building the math stack
+                    and benchmarking against Ubuntu.</em></p>
+
+            <p><strong>If you enjoyed this dive into low-level systems, clap and follow for more articles on building
+                    things from first principles.</strong></p>
+        </div>
+
+        <!-- Tags -->
+        <div class="tags">
+            <a href="#" class="tag">Linux</a>
+            <a href="#" class="tag">Programming</a>
+            <a href="#" class="tag">Operating Systems</a>
+            <a href="#" class="tag">Mathematics</a>
+            <a href="#" class="tag">Software Engineering</a>
+        </div>
+
+        <!-- Clap Section -->
+        <div class="clap-section">
+            <button class="clap-button" onclick="animateClap(this)">👏</button>
+            <p class="clap-count"><span id="clapCount">2,431</span> claps</p>
+        </div>
+
+        <!-- Author Footer -->
+        <div class="author-footer">
+            <div class="author-footer-avatar">F</div>
+            <div class="author-footer-info">
+                <h3>Written by Fawaz Olatunde</h3>
+                <p>Building the Axiom stack: custom languages, math-native OS, and AI that doesn't hallucinate. 19.
+                    Afore-backed founder. Carleton CS.</p>
+                <button class="follow-button">Follow</button>
+            </div>
+        </div>
+
+        <!-- Responses -->
+        <div class="responses-section">
+            <h3 class="responses-header">Responses (89)</h3>
+        </div>
+    </article>
+
+    <script>
+        let clapValue = 2431;
+
+        function animateClap(button) {
+            button.classList.add('animate');
+            button.classList.add('clapped');
+            clapValue++;
+            document.getElementById('clapCount').textContent = clapValue.toLocaleString();
+
+            setTimeout(() => {
+                button.classList.remove('animate');
+            }, 300);
+        }
+
+        function clap(element) {
+            const numberSpan = element.querySelector('.clap-number');
+            let count = parseFloat(numberSpan.textContent.replace('K', '')) * 1000;
+            count += 1;
+            if (count >= 1000) {
+                numberSpan.textContent = (count / 1000).toFixed(1) + 'K';
+            } else {
+                numberSpan.textContent = count;
+            }
+        }
+    </script>
+</body>
+
+</html>
