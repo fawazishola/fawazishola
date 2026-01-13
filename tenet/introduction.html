@@ -1,38 +1,40 @@
 <!DOCTYPE HTML>
 <html lang="en" class="coal" dir="ltr">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>Introduction - Tenet v1.0.0</title>
+
+<head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Introduction - Tenet v1.0.0</title>
 
 
-        <!-- Custom HTML head -->
-        
-        <meta name="description" content="A domain-specific language for game theory modeling, analysis, and simulation">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff">
+    <!-- Custom HTML head -->
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+    <meta name="description" content="A domain-specific language for game theory modeling, analysis, and simulation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
 
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
 
-        <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/css/custom.css">
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
 
-    </head>
-    <body class="sidebar-visible no-js">
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/css/custom.css">
+
+</head>
+
+<body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -59,7 +61,7 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('coal')
@@ -77,7 +79,7 @@
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
@@ -89,7 +91,66 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html" class="active">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="getting-started/installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="getting-started/quick-start.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="getting-started/first-game.html"><strong aria-hidden="true">3.</strong> Your First Game</a></li><li class="chapter-item expanded affix "><li class="part-title">Language Guide</li><li class="chapter-item expanded "><a href="language/data-types.html"><strong aria-hidden="true">4.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="language/variables.html"><strong aria-hidden="true">5.</strong> Variables & Scope</a></li><li class="chapter-item expanded "><a href="language/control-flow.html"><strong aria-hidden="true">6.</strong> Control Flow</a></li><li class="chapter-item expanded "><a href="language/functions.html"><strong aria-hidden="true">7.</strong> Functions</a></li><li class="chapter-item expanded "><a href="language/classes.html"><strong aria-hidden="true">8.</strong> Classes</a></li><li class="chapter-item expanded affix "><li class="part-title">Game Theory DSL</li><li class="chapter-item expanded "><a href="game-theory/defining-games.html"><strong aria-hidden="true">9.</strong> Defining Games</a></li><li class="chapter-item expanded "><a href="game-theory/players-strategies.html"><strong aria-hidden="true">10.</strong> Players & Strategies</a></li><li class="chapter-item expanded "><a href="game-theory/payoffs.html"><strong aria-hidden="true">11.</strong> Payoff Matrices</a></li><li class="chapter-item expanded "><a href="game-theory/solving.html"><strong aria-hidden="true">12.</strong> Solving Games</a></li><li class="chapter-item expanded affix "><li class="part-title">Novel Use Cases</li><li class="chapter-item expanded "><a href="novel-use-cases.html"><strong aria-hidden="true">13.</strong> Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Model Gallery</li><li class="chapter-item expanded "><a href="gallery/classic-games.html"><strong aria-hidden="true">14.</strong> Classic Games</a></li><li class="chapter-item expanded "><a href="gallery/industrial-org.html"><strong aria-hidden="true">15.</strong> Industrial Organization</a></li><li class="chapter-item expanded "><a href="gallery/behavioral.html"><strong aria-hidden="true">16.</strong> Behavioral Economics</a></li><li class="chapter-item expanded "><a href="gallery/political-economy.html"><strong aria-hidden="true">17.</strong> Political Economy</a></li><li class="chapter-item expanded affix "><li class="part-title">Reference</li><li class="chapter-item expanded "><a href="reference/grammar.html"><strong aria-hidden="true">18.</strong> Grammar Specification</a></li><li class="chapter-item expanded "><a href="reference/keywords.html"><strong aria-hidden="true">19.</strong> Keywords & Operators</a></li><li class="chapter-item expanded "><a href="reference/reserved.html"><strong aria-hidden="true">20.</strong> Reserved Words</a></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="appendix/axiom.html"><strong aria-hidden="true">21.</strong> Axiom Ecosystem</a></li></ol>
+                <ol class="chapter">
+                    <li class="chapter-item expanded affix "><a href="introduction.html" class="active">Introduction</a>
+                    </li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Getting Started</li>
+                    <li class="chapter-item expanded "><a href="getting-started/installation.html"><strong
+                                aria-hidden="true">1.</strong> Installation</a></li>
+                    <li class="chapter-item expanded "><a href="getting-started/quick-start.html"><strong
+                                aria-hidden="true">2.</strong> Quick Start</a></li>
+                    <li class="chapter-item expanded "><a href="getting-started/first-game.html"><strong
+                                aria-hidden="true">3.</strong> Your First Game</a></li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Language Guide</li>
+                    <li class="chapter-item expanded "><a href="language/data-types.html"><strong
+                                aria-hidden="true">4.</strong> Data Types</a></li>
+                    <li class="chapter-item expanded "><a href="language/variables.html"><strong
+                                aria-hidden="true">5.</strong> Variables & Scope</a></li>
+                    <li class="chapter-item expanded "><a href="language/control-flow.html"><strong
+                                aria-hidden="true">6.</strong> Control Flow</a></li>
+                    <li class="chapter-item expanded "><a href="language/functions.html"><strong
+                                aria-hidden="true">7.</strong> Functions</a></li>
+                    <li class="chapter-item expanded "><a href="language/classes.html"><strong
+                                aria-hidden="true">8.</strong> Classes</a></li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Game Theory DSL</li>
+                    <li class="chapter-item expanded "><a href="game-theory/defining-games.html"><strong
+                                aria-hidden="true">9.</strong> Defining Games</a></li>
+                    <li class="chapter-item expanded "><a href="game-theory/players-strategies.html"><strong
+                                aria-hidden="true">10.</strong> Players & Strategies</a></li>
+                    <li class="chapter-item expanded "><a href="game-theory/payoffs.html"><strong
+                                aria-hidden="true">11.</strong> Payoff Matrices</a></li>
+                    <li class="chapter-item expanded "><a href="game-theory/solving.html"><strong
+                                aria-hidden="true">12.</strong> Solving Games</a></li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Novel Use Cases</li>
+                    <li class="chapter-item expanded "><a href="novel-use-cases.html"><strong
+                                aria-hidden="true">13.</strong> Overview</a></li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Model Gallery</li>
+                    <li class="chapter-item expanded "><a href="gallery/classic-games.html"><strong
+                                aria-hidden="true">14.</strong> Classic Games</a></li>
+                    <li class="chapter-item expanded "><a href="gallery/industrial-org.html"><strong
+                                aria-hidden="true">15.</strong> Industrial Organization</a></li>
+                    <li class="chapter-item expanded "><a href="gallery/behavioral.html"><strong
+                                aria-hidden="true">16.</strong> Behavioral Economics</a></li>
+                    <li class="chapter-item expanded "><a href="gallery/political-economy.html"><strong
+                                aria-hidden="true">17.</strong> Political Economy</a></li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Reference</li>
+                    <li class="chapter-item expanded "><a href="reference/grammar.html"><strong
+                                aria-hidden="true">18.</strong> Grammar Specification</a></li>
+                    <li class="chapter-item expanded "><a href="reference/keywords.html"><strong
+                                aria-hidden="true">19.</strong> Keywords & Operators</a></li>
+                    <li class="chapter-item expanded "><a href="reference/reserved.html"><strong
+                                aria-hidden="true">20.</strong> Reserved Words</a></li>
+                    <li class="chapter-item expanded affix ">
+                    <li class="part-title">Appendix</li>
+                    <li class="chapter-item expanded "><a href="appendix/axiom.html"><strong
+                                aria-hidden="true">21.</strong> Axiom Ecosystem</a></li>
+                </ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -97,7 +158,7 @@
         <!-- Track and set sidebar scroll position -->
         <script>
             var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
+            sidebarScrollbox.addEventListener('click', function (e) {
                 if (e.target.tagName === 'A') {
                     sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
                 }
@@ -119,13 +180,17 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor"
+                            title="Toggle Table of Contents" aria-label="Toggle Table of Contents"
+                            aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
                         </label>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme"
+                            aria-label="Change theme" aria-haspopup="true" aria-expanded="false"
+                            aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
@@ -135,7 +200,9 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)"
+                            aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S"
+                            aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -146,7 +213,8 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/yourusername/tenet" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/yourusername/tenet" title="Git repository"
+                            aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
 
@@ -155,7 +223,8 @@
 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..."
+                            aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -168,7 +237,7 @@
                 <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
@@ -176,17 +245,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="tenet"><a class="header" href="#tenet">Tenet</a></h1>
-<blockquote>
-<p>A domain-specific language for game theory modeling, analysis, and simulation.</p>
-</blockquote>
-<div class="note">
-<strong>✅ Stable Release v1.0.0</strong> — Tenet is now stable and production-ready.
-</div>
-<hr />
-<h2 id="what-is-tenet"><a class="header" href="#what-is-tenet">What is Tenet?</a></h2>
-<p>Tenet is a programming language designed for <strong>game theorists, economists, and researchers</strong> who want to model strategic interactions without becoming expert programmers.</p>
-<p>Instead of wrestling with matrices in Python or MATLAB, you describe games in a natural, readable syntax:</p>
-<pre><code class="language-tenet">game PrisonersDilemma {
+                        <blockquote>
+                            <p>A domain-specific language for game theory modeling, analysis, and simulation.</p>
+                        </blockquote>
+                        <div class="note">
+                            <strong>Stable Release v1.0.0</strong> — Tenet is now stable and production-ready.
+                        </div>
+                        <hr />
+                        <h2 id="what-is-tenet"><a class="header" href="#what-is-tenet">What is Tenet?</a></h2>
+                        <p>Tenet is a programming language designed for <strong>game theorists, economists, and
+                                researchers</strong> who want to model strategic interactions without becoming expert
+                            programmers.</p>
+                        <p>Instead of wrestling with matrices in Python or MATLAB, you describe games in a natural,
+                            readable syntax:</p>
+                        <pre><code class="language-tenet">game PrisonersDilemma {
   players Alice, Bob
   strategies Cooperate, Defect
 
@@ -216,42 +288,109 @@ solve PrisonersDilemma;
 //   -&gt; (Defect, Defect) with payoffs (1, 1)
 // ═══════════════════════════════════════
 </code></pre>
-<hr />
-<h2 id="why-tenet"><a class="header" href="#why-tenet">Why Tenet?</a></h2>
-<p><strong>Libraries like <code>nashpy</code> or <code>gambit</code> are powerful, but they require users to think like programmers first and game theorists second.</strong> Tenet inverts this:</p>
-<div class="table-wrapper"><table><thead><tr><th>Approach</th><th>Focus</th><th>Error Handling</th></tr></thead><tbody>
-<tr><td>Python + Library</td><td>&quot;How do I structure this data?&quot;</td><td>Runtime crashes</td></tr>
-<tr><td><strong>Tenet</strong></td><td>&quot;How do I model this game?&quot;</td><td>Compile-time validation</td></tr>
-</tbody></table>
-</div>
-<p>By making game theory a <strong>first-class citizen</strong> of the language, we can:</p>
-<ol>
-<li><strong>Catch errors early</strong> — Invalid payoff matrices are syntax errors, not runtime bugs</li>
-<li><strong>Optimize simulations</strong> — The compiler knows the game structure and can optimize</li>
-<li><strong>Enforce correctness</strong> — You can't accidentally create a game with mismatched strategies</li>
-</ol>
-<hr />
-<h2 id="features"><a class="header" href="#features">Features</a></h2>
-<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Description</th></tr></thead><tbody>
-<tr><td><strong>Clean Syntax</strong></td><td>Minimalist, readable syntax—no boilerplate</td></tr>
-<tr><td><strong>Game Definitions</strong></td><td>Define players, strategies, and payoff matrices naturally</td></tr>
-<tr><td><strong>Full Language</strong></td><td>Functions, classes, loops—a complete programming language</td></tr>
-<tr><td><strong>Economic Models</strong></td><td>12+ pre-built models from microeconomics to political science</td></tr>
-</tbody></table>
-</div>
-<hr />
-<h2 id="part-of-the-axiom-ecosystem"><a class="header" href="#part-of-the-axiom-ecosystem">Part of the Axiom Ecosystem</a></h2>
-<p>Tenet is one component of a larger computational stack:</p>
-<div class="table-wrapper"><table><thead><tr><th>Project</th><th>Description</th></tr></thead><tbody>
-<tr><td><strong>Tenet</strong></td><td>Game Theory DSL <em>(you are here)</em></td></tr>
-<tr><td><strong>Flux</strong></td><td>Math-first programming language</td></tr>
-<tr><td><strong>Axiom</strong></td><td>Neurosymbolic AI-native math operating system</td></tr>
-<tr><td><strong>Alexthia</strong></td><td>Reasoning LLM that understands the entire stack</td></tr>
-</tbody></table>
-</div>
-<hr />
-<h2 id="quick-example-cournot-duopoly"><a class="header" href="#quick-example-cournot-duopoly">Quick Example: Cournot Duopoly</a></h2>
-<pre><code class="language-tenet">// Two firms compete on quantity
+                        <hr />
+                        <h2 id="why-tenet"><a class="header" href="#why-tenet">Why Tenet?</a></h2>
+                        <p><strong>Libraries like <code>nashpy</code> or <code>gambit</code> are powerful, but they
+                                require users to think like programmers first and game theorists second.</strong> Tenet
+                            inverts this:</p>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Approach</th>
+                                        <th>Focus</th>
+                                        <th>Error Handling</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Python + Library</td>
+                                        <td>&quot;How do I structure this data?&quot;</td>
+                                        <td>Runtime crashes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tenet</strong></td>
+                                        <td>&quot;How do I model this game?&quot;</td>
+                                        <td>Compile-time validation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>By making game theory a <strong>first-class citizen</strong> of the language, we can:</p>
+                        <ol>
+                            <li><strong>Catch errors early</strong> — Invalid payoff matrices are syntax errors, not
+                                runtime bugs</li>
+                            <li><strong>Optimize simulations</strong> — The compiler knows the game structure and can
+                                optimize</li>
+                            <li><strong>Enforce correctness</strong> — You can't accidentally create a game with
+                                mismatched strategies</li>
+                        </ol>
+                        <hr />
+                        <h2 id="features"><a class="header" href="#features">Features</a></h2>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Clean Syntax</strong></td>
+                                        <td>Minimalist, readable syntax—no boilerplate</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Game Definitions</strong></td>
+                                        <td>Define players, strategies, and payoff matrices naturally</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Full Language</strong></td>
+                                        <td>Functions, classes, loops—a complete programming language</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Economic Models</strong></td>
+                                        <td>12+ pre-built models from microeconomics to political science</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                        <h2 id="part-of-the-axiom-ecosystem"><a class="header" href="#part-of-the-axiom-ecosystem">Part
+                                of the Axiom Ecosystem</a></h2>
+                        <p>Tenet is one component of a larger computational stack:</p>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Project</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Tenet</strong></td>
+                                        <td>Game Theory DSL <em>(you are here)</em></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Flux</strong></td>
+                                        <td>Math-first programming language</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Axiom</strong></td>
+                                        <td>Neurosymbolic AI-native math operating system</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alexthia</strong></td>
+                                        <td>Reasoning LLM that understands the entire stack</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                        <h2 id="quick-example-cournot-duopoly"><a class="header"
+                                href="#quick-example-cournot-duopoly">Quick Example: Cournot Duopoly</a></h2>
+                        <pre><code class="language-tenet">// Two firms compete on quantity
 var max_price = 100;
 var unit_cost = 10;
 
@@ -276,23 +415,28 @@ game CournotDuopoly {
 
 solve CournotDuopoly;
 </code></pre>
-<hr />
-<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
-<ul>
-<li><strong><a href="./getting-started/installation.html">Installation</a></strong> — Get Tenet running on your machine</li>
-<li><strong><a href="./getting-started/quick-start.html">Quick Start</a></strong> — Write your first Tenet program</li>
-<li><strong><a href="./language/data-types.html">Language Guide</a></strong> — Learn the full language</li>
-<li><strong><a href="./game-theory/defining-games.html">Game Theory DSL</a></strong> — Deep dive into game definitions</li>
-</ul>
+                        <hr />
+                        <h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+                        <ul>
+                            <li><strong><a href="./getting-started/installation.html">Installation</a></strong> — Get
+                                Tenet running on your machine</li>
+                            <li><strong><a href="./getting-started/quick-start.html">Quick Start</a></strong> — Write
+                                your first Tenet program</li>
+                            <li><strong><a href="./language/data-types.html">Language Guide</a></strong> — Learn the
+                                full language</li>
+                            <li><strong><a href="./game-theory/defining-games.html">Game Theory DSL</a></strong> — Deep
+                                dive into game definitions</li>
+                        </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
-                            <a rel="next prefetch" href="getting-started/installation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+                        <a rel="next prefetch" href="getting-started/installation.html" class="mobile-nav-chapters next"
+                            title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -301,9 +445,10 @@ solve CournotDuopoly;
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
-                    <a rel="next prefetch" href="getting-started/installation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
+                <a rel="next prefetch" href="getting-started/installation.html" class="nav-chapters next"
+                    title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <i class="fa fa-angle-right"></i>
+                </a>
             </nav>
 
         </div>
@@ -328,5 +473,6 @@ solve CournotDuopoly;
 
 
     </div>
-    </body>
+</body>
+
 </html>
