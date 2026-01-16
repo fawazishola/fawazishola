@@ -461,33 +461,59 @@
                         <li role="tab"><a href="#stack" onclick="showTab('stack')">Tech Stack</a></li>
                         <li role="tab"><a href="#demo" onclick="showTab('demo')">Demo</a></li>
                         <li role="tab"><a href="#download" onclick="showTab('download')">Download</a></li>
-                        <li role="tab"><a href="#roadmap" onclick="showTab('roadmap')">Roadmap</a></li>
                     </menu>
 
                     <div class="window" role="tabpanel">
                         <div class="window-body">
                             <!-- Overview Tab -->
                             <div id="overview" class="tab-content active">
-                                <h2>🎯 The Axiom Philosophy</h2>
-                                <p><strong>Axiom</strong> is not just an operating system; it is a <strong>Cognitive
-                                        Environment</strong> designed for deep work.</p>
-                                <p>By stripping away modern OS bloat and building from the kernel up, we have created a
-                                    platform dedicated to two goals:</p>
+                                <h2>The Neurosymbolic AI-Native Operating System</h2>
+                                <p><strong>Axiom</strong> is the world's first OS designed from the kernel up to
+                                    integrate Artificial Intelligence with Formal Mathematics.</p>
 
-                                <ul class="tree-view">
-                                    <li><strong>Eliminating Distraction</strong> — No notifications, no telemetry, no
-                                        "user engagement" loops. Just you and the math.</li>
-                                    <li><strong>Optimizing Computing</strong> — Every CPU cycle is dedicated to your
-                                        calculations. Libraries are compiled with <code>-march=native</code> to unlock
-                                        the full physics of your silicon.</li>
-                                    <li><strong>Paper-as-Code</strong> — Integrated workflows for converting thoughts
-                                        into rigorous proofs using Flux and Tenet.</li>
-                                </ul>
+                                <div class="phase-card">
+                                    <h4>1. Neurosymbolic</h4>
+                                    <p>The fusion of connectionist intuition and symbolic rigor. Pure LLMs hallucinate;
+                                        pure code is rigid. Axiom bridges them.</p>
+                                    <ul>
+                                        <li><strong>The Neural:</strong> High-speed Large Language Models (Qwen) provide
+                                            creative reasoning and code generation.</li>
+                                        <li><strong>The Symbolic:</strong> Formal verification engines (Flux/Tenet)
+                                            enforce mathematical correctness and logical bounds.</li>
+                                        <li><strong>The Result:</strong> A system that "thinks" creatively but
+                                            "verifies" rigorously.</li>
+                                    </ul>
+                                </div>
 
+                                <div class="phase-card">
+                                    <h4>2. AI-Native</h4>
+                                    <p>Intelligence is not an app you install; it is the fabric of the system.</p>
+                                    <ul>
+                                        <li><strong>Kernel-Level:</strong> Resource scheduling is solved via Game Theory
+                                            (Nash Equilibria), not static heuristics.</li>
+                                        <li><strong>Shell-Level:</strong> The terminal understands natural language and
+                                            calculus natively.</li>
+                                        <li><strong>Zero Latency:</strong> Inference engines are compiled into ring-3
+                                            services, running continuously alongside system processes.</li>
+                                    </ul>
+                                </div>
 
+                                <div class="phase-card">
+                                    <h4>3. Operating System</h4>
+                                    <p>A bare-metal distribution, not a skin.</p>
+                                    <ul>
+                                        <li><strong>From Scratch:</strong> Built on Linux From Scratch (LFS) 12.2.</li>
+                                        <li><strong>Native Optimization:</strong> Every binary is compiled with
+                                            <code>-march=native</code> to unlock the specific physics of your silicon
+                                            (AVX-512).
+                                        </li>
+                                        <li><strong>Sovereign:</strong> No telemetry. No cloud dependencies. You own the
+                                            math.</li>
+                                    </ul>
+                                </div>
 
                                 <fieldset>
-                                    <legend>🚀 Unique Architecture</legend>
+                                    <legend>Unique Architecture</legend>
                                     <table class="comparison-table">
                                         <tr>
                                             <th>Feature</th>
@@ -499,36 +525,23 @@
                                         </tr>
                                         <tr>
                                             <td><strong>Custom RAM Management</strong></td>
-                                            <td>We rewrote the allocator. No garbage collection pauses, ever.</td>
+                                            <td>Rewritten allocator. No garbage collection pauses, ever.</td>
                                         </tr>
                                         <tr>
                                             <td><strong>GPU-First Kernel</strong></td>
-                                            <td>The OS kernel treats the GPU as a first-class citizen, not just a
-                                                peripheral.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Flux Transpiler</strong></td>
-                                            <td>Write standard logic, compile to bare-metal optimized bytecode.</td>
+                                            <td>Treats the GPU as a first-class citizen, not just a peripheral.</td>
                                         </tr>
                                     </table>
                                 </fieldset>
-
-                                <div
-                                    style="margin-top: 20px; text-align: center; border: 2px groove #808080; padding: 15px; background: #c0c0c0;">
-                                    <h3 style="margin: 0; color: #000;">"Give me a place to stand and I shall move the
-                                        world."</h3>
-                                    <p style="margin: 5px 0 0 0; font-style: italic;">— Archimedes (and the Axiom
-                                        Philosophy)</p>
-                                </div>
                             </div>
 
                             <!-- Download Tab -->
                             <div id="download" class="tab-content">
-                                <h2>📥 Download Axiom OS</h2>
+                                <h2>Download Axiom OS</h2>
                                 <p><em>Get the complete math-native workstation — ready to boot</em></p>
 
                                 <fieldset>
-                                    <legend>💿 ISO Images</legend>
+                                    <legend>ISO Images</legend>
                                     <table class="comparison-table">
                                         <tr>
                                             <th>Edition</th>
@@ -558,7 +571,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>📋 System Requirements</legend>
+                                    <legend>System Requirements</legend>
                                     <table class="comparison-table">
                                         <tr>
                                             <th>Component</th>
@@ -589,7 +602,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>🔐 Verification</legend>
+                                    <legend>Verification</legend>
                                     <p>Verify your download with SHA256:</p>
                                     <div class="code-block">sha256sum axiom-core-1.0.iso
                                         # Expected: 8a7b3c4d5e6f... (see CHECKSUMS.txt)
@@ -599,7 +612,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>🔧 Quick Install</legend>
+                                    <legend>Quick Install</legend>
                                     <div class="code-block"># Write to USB drive
                                         sudo dd if=axiom-desktop-1.0.iso of=/dev/sdX bs=4M status=progress
 
@@ -610,7 +623,7 @@
 
                             <!-- Demo Tab -->
                             <div id="demo" class="tab-content">
-                                <h2>🖥️ Boot Demo</h2>
+                                <h2>Boot Demo</h2>
                                 <p><em>Watch Axiom OS boot from GRUB to login prompt</em></p>
 
                                 <fieldset>
@@ -923,7 +936,7 @@
 
                             <!-- Architecture Tab -->
                             <div id="architecture" class="tab-content">
-                                <h2>🧠 Intelligent Architecture</h2>
+                                <h2>Intelligent Architecture</h2>
                                 <p><em>Moving from "Operating System" to "Intelligent Agent"</em></p>
 
                                 <fieldset>
@@ -973,7 +986,7 @@
                                 </div>
 
                                 <div class="phase-card">
-                                    <h4>⚡ Flux: The Native Math Shell</h4>
+                                    <h4>Flux: The Native Math Shell</h4>
                                     <p>Bash is a text processor. Flux is a <strong>Calculus Processor</strong>.</p>
                                     <div class="code-block">// Predictive Cooling (Derivative Control)
                                         val temp_t = System.cpu_temp()
@@ -985,11 +998,11 @@
 
                             <!-- Stack Tab -->
                             <div id="stack" class="tab-content">
-                                <h2>⚡ The Ultimate Math-Native Stack</h2>
+                                <h2>The Ultimate Math-Native Stack</h2>
                                 <p><em>34 Tools. Zero Bloat. Infinite Precision.</em></p>
 
                                 <fieldset>
-                                    <legend>🚀 Axiom Exclusives</legend>
+                                    <legend>Axiom Exclusives</legend>
                                     <table class="comparison-table">
                                         <tr>
                                             <th>Tool</th>
@@ -1000,7 +1013,8 @@
                                             <td><strong>Flux</strong></td>
                                             <td>Native Shell</td>
                                             <td>Bytecode compiler where math looks like math. Login shell
-                                                <code>/bin/flux</code>.</td>
+                                                <code>/bin/flux</code>.
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td><strong>Tenet</strong></td>
@@ -1011,7 +1025,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>🧠 Infinite Precision (The Triad)</legend>
+                                    <legend>Infinite Precision (The Triad)</legend>
                                     <table class="comparison-table">
                                         <tr>
                                             <th>Library</th>
@@ -1033,7 +1047,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>🏎️ Linear Algebra (The Engine)</legend>
+                                    <legend>Linear Algebra (The Engine)</legend>
                                     <ul>
                                         <li><strong>OpenBLAS</strong>: Compiled with <code>-march=native</code>.</li>
                                         <li><strong>LAPACK</strong>: Linear systems solver.</li>
@@ -1043,7 +1057,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>🤖 Embedded AI</legend>
+                                    <legend>Embedded AI</legend>
                                     <table class="comparison-table">
                                         <tr>
                                             <td><strong>llama.cpp</strong></td>
@@ -1057,140 +1071,6 @@
                                 </fieldset>
                             </div>
 
-                            <!-- Roadmap Tab -->
-                            <div id="roadmap" class="tab-content">
-                                <h2>🗺️ Roadmap</h2>
-                                <p><em>Completed and future enhancements</em></p>
-
-                                <fieldset>
-                                    <legend>✓ Phase 0: Custom Language Integration</legend>
-                                    <p><em>Your own languages, burned into the silicon of your OS.</em></p>
-
-                                    <h4>Flux (C Bytecode VM) — Kernel-Level Calculator</h4>
-                                    <table class="comparison-table">
-                                        <tr>
-                                            <th>Aspect</th>
-                                            <th>Details</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Binary</td>
-                                            <td><code>/usr/bin/flux</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Flags</td>
-                                            <td><code>-O3 -march=native -flto -lgmp -lm</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Man Page</td>
-                                            <td><code>man flux</code></td>
-                                        </tr>
-                                    </table>
-
-                                    <h4 style="margin-top: 16px;">Tenet (Java Interpreter) — The "No-JVM" Trick</h4>
-                                    <table class="comparison-table">
-                                        <tr>
-                                            <th>Aspect</th>
-                                            <th>Details</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Binary</td>
-                                            <td><code>/usr/bin/tenet</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Compilation</td>
-                                            <td>GraalVM Native Image (AOT)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dependency</td>
-                                            <td>ZERO (no JRE required)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Startup</td>
-                                            <td>Milliseconds (vs JVM seconds)</td>
-                                        </tr>
-                                    </table>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>✓ Phase 0.5: The "Oracle" — Embedded AI</legend>
-                                    <table class="comparison-table">
-                                        <tr>
-                                            <th>Component</th>
-                                            <th>Details</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Engine</td>
-                                            <td><code>llama.cpp</code> (compiled with AVX-512)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Model</td>
-                                            <td>Qwen 2.5 7B (Q4_K_M quantized)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Binary</td>
-                                            <td><code>/usr/bin/axiom-ai</code></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Library</td>
-                                            <td><code>libllama.so</code> (for Flux integration)</td>
-                                        </tr>
-                                    </table>
-                                    <div class="code-block" style="margin-top: 12px;">// Flux code calling native AI
-                                        var answer = oracle.ask("Integrate x² from 0 to 5");
-                                        print answer;</div>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>📜 The Axiom Constitution</legend>
-                                    <p><em>Future features must adhere to these non-negotiable constraints:</em></p>
-                                    <ul class="tree-view">
-                                        <li><strong>Zero Bloat</strong> — If a feature doesn't serve the math, it
-                                            doesn't ship.</li>
-                                        <li><strong>User Sovereignty</strong> — No telemetry. No auto-updates. No "cloud
-                                            integration" without consent.</li>
-                                        <li><strong>Silicon Respect</strong> — Software must bend to the hardware, not
-                                            the other way around.</li>
-                                    </ul>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>🏛️ The Foundation_</legend>
-                                    <ul class="tree-view">
-                                        <li><strong>Core Infrastructure</strong> — Custom Kernel 6.7.4, SysVinit,
-                                            Network Stack</li>
-                                        <li><strong>Graphical Environment</strong> — Xorg, i3 Tiling WM, Alacritty (GPU
-                                            Accelerated)</li>
-                                        <li><strong>Dev Ecosystem</strong> — Neovim, Git, Rust, Go, Python 3.12, Node.js
-                                        </li>
-                                    </ul>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>🔭 Horizon 2026</legend>
-                                    <table class="comparison-table">
-                                        <tr>
-                                            <th>Goal</th>
-                                            <th>Vision</th>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Neural Kernel</strong></td>
-                                            <td>Move the LLM from userspace to ring-0 for sub-1ms latency.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Holographic FS</strong></td>
-                                            <td>File system organized by semantic embeddings, not folders.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Axiom Cloud</strong></td>
-                                            <td>Peer-to-peer compute clusters for training massive Flux models.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Paper-to-Silicon</strong></td>
-                                            <td>Compile LaTeX directly to FPGA bitstreams.</td>
-                                        </tr>
-                                    </table>
-                                </fieldset>
-                            </div>
                         </div>
                     </div>
 
@@ -1397,14 +1277,14 @@
         <div class="start-menu-sidebar">AXIOM 2026</div>
         <div class="start-menu-content">
             <div class="start-item" onclick="showLoginScreen()">
-                <span style="font-size: 16px;">⚡</span> <strong>Power On</strong>
+                <strong>Power On</strong>
             </div>
             <div class="start-item" onclick="window.location.reload()">
-                <span style="font-size: 16px;">🔄</span> Reboot System
+                Reboot System
             </div>
             <div class="separator"></div>
             <div class="start-item" onclick="alert('Shutting down...'); window.close();">
-                <span style="font-size: 16px;">🔴</span> Shut Down
+                Shut Down
             </div>
         </div>
     </div>
