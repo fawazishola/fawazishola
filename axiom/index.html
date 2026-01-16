@@ -457,10 +457,10 @@
                     <menu role="tablist">
                         <li role="tab" aria-selected="true"><a href="#overview"
                                 onclick="showTab('overview')">Overview</a></li>
-                        <li role="tab"><a href="#download" onclick="showTab('download')">Download</a></li>
+                        <li role="tab"><a href="#architecture" onclick="showTab('architecture')">Architecture</a></li>
+                        <li role="tab"><a href="#stack" onclick="showTab('stack')">Tech Stack</a></li>
                         <li role="tab"><a href="#demo" onclick="showTab('demo')">Demo</a></li>
-                        <li role="tab"><a href="#blfs" onclick="showTab('blfs')">Math Stack</a></li>
-                        <li role="tab"><a href="#research" onclick="showTab('research')">Research</a></li>
+                        <li role="tab"><a href="#download" onclick="showTab('download')">Download</a></li>
                         <li role="tab"><a href="#roadmap" onclick="showTab('roadmap')">Roadmap</a></li>
                     </menu>
 
@@ -616,9 +616,7 @@
                                 <fieldset>
                                     <legend>System Boot</legend>
                                     <div class="demo-container crt-effect" style="background: black;">
-                                        <iframe src="boot_sequence.html"
-                                            style="width: 100%; height: 100%; border: none; overflow: hidden;"
-                                            title="Axiom Boot Sequence"></iframe>
+                                        <img src="axiom_boot_screen.png" alt="Axiom OS Boot Screen">
                                         <div class="demo-overlay">AXIOM OS v1.0</div>
                                     </div>
                                     <div style="text-align: center; margin-top: 8px;">
@@ -923,103 +921,137 @@
                                 </fieldset>
                             </div>
 
-                            <!-- Research Tab -->
-                            <div id="research" class="tab-content">
-                                <h2>🔬 Research Angles</h2>
-                                <p><em>Publishable directions within the Axiom ecosystem</em></p>
-                                <p>Axiom is not one project — it's a <strong>research platform</strong> with multiple
-                                    publishable threads.</p>
+                            <!-- Architecture Tab -->
+                            <div id="architecture" class="tab-content">
+                                <h2>🧠 Intelligent Architecture</h2>
+                                <p><em>Moving from "Operating System" to "Intelligent Agent"</em></p>
 
                                 <fieldset>
-                                    <legend>Thread 1: Verifier-Optimizer Loops</legend>
-                                    <p><strong>Core Question:</strong> Can a smaller LLM achieve higher accuracy through
-                                        architectural constraints (Game Theory verification) rather than scale?</p>
+                                    <legend>The Biological Metaphor</legend>
                                     <table class="comparison-table">
                                         <tr>
-                                            <th>Model</th>
-                                            <th>Training</th>
-                                            <th>Expected MATH Score</th>
+                                            <th>Component</th>
+                                            <th>Role</th>
+                                            <th>Description</th>
                                         </tr>
                                         <tr>
-                                            <td>Qwen 7B (baseline)</td>
-                                            <td>None</td>
-                                            <td>~75%</td>
+                                            <td><strong>Kernel</strong></td>
+                                            <td>Nervous System</td>
+                                            <td>Carries signals, executes commands. (Linux 6.7.4)</td>
                                         </tr>
                                         <tr>
-                                            <td>Qwen 7B + Game Theory</td>
-                                            <td>10k Tenet samples</td>
-                                            <td>~78-80%</td>
+                                            <td><strong>Tenet</strong></td>
+                                            <td>The Brain</td>
+                                            <td><strong>Game Theoretic Scheduler</strong>. Decides resource allocation
+                                                via Nash Equilibria.</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Qwen 7B + GT + Verifier</strong></td>
-                                            <td>10k Tenet + Flux loop</td>
-                                            <td><strong>~85%</strong></td>
+                                            <td><strong>Flux</strong></td>
+                                            <td>The Blood</td>
+                                            <td><strong>Native Math Shell</strong>. Carries logic through the system
+                                                without VM overhead.</td>
                                         </tr>
                                         <tr>
-                                            <td>Qwen 14B (baseline)</td>
-                                            <td>None</td>
-                                            <td>~80%</td>
+                                            <td><strong>AVX-512</strong></td>
+                                            <td>The Muscle</td>
+                                            <td>Raw compute power compiled with <code>-march=native</code>.</td>
                                         </tr>
                                     </table>
-                                    <p><strong>Win Condition:</strong> 7B+GT+Verifier beats 14B → <em>Architecture beats
-                                            scale</em> (the headline!)</p>
-                                    <p><strong>Venues:</strong> NeurIPS, ICML, EMNLP</p>
-                                    <div style="margin-top: 10px; text-align: center;">
-                                        <a href="../Alexitha/index.html" target="_blank" style="text-decoration: none;">
-                                            <button style="font-weight: bold; cursor: pointer;">🚀 Launch Interactive
-                                                "Glass Box" Demo</button>
-                                        </a>
-                                    </div>
                                 </fieldset>
 
-                                <fieldset>
-                                    <legend>Thread 2: Teaching LLMs Custom Languages</legend>
-                                    <p><strong>Core Question:</strong> Can fine-tuning on a novel DSL improve structured
-                                        reasoning?</p>
-                                    <p><strong>Hypothesis:</strong> Training on Tenet (game theory DSL) transfers to
-                                        improved logical reasoning on unrelated tasks.</p>
-                                    <p><strong>Venues:</strong> ACL, EMNLP, COLM</p>
-                                </fieldset>
+                                <div class="phase-card">
+                                    <h4>♟️ Tenet: The Game Theoretic Scheduler</h4>
+                                    <p>Standard schedulers (CFS) use dumb heuristics. Tenet solves a <strong>Real-Time
+                                            Game</strong> to optimize global utility.</p>
+                                    <ul>
+                                        <li><strong>The Game:</strong> Resource Allocation Market</li>
+                                        <li><strong>The Players:</strong> Active Processes (PID)</li>
+                                        <li><strong>The Strategy:</strong> Yield, Compete, or Burst</li>
+                                        <li><strong>The Result:</strong> Mathematically proven optimality for latency vs
+                                            throughput.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="phase-card">
+                                    <h4>⚡ Flux: The Native Math Shell</h4>
+                                    <p>Bash is a text processor. Flux is a <strong>Calculus Processor</strong>.</p>
+                                    <div class="code-block">// Predictive Cooling (Derivative Control)
+                                        val temp_t = System.cpu_temp()
+                                        val rate = diff(temp_t)
+
+                                        if (rate > 10.0) System.set_fan(100.0)</div>
+                                </div>
+                            </div>
+
+                            <!-- Stack Tab -->
+                            <div id="stack" class="tab-content">
+                                <h2>⚡ The Ultimate Math-Native Stack</h2>
+                                <p><em>34 Tools. Zero Bloat. Infinite Precision.</em></p>
 
                                 <fieldset>
-                                    <legend>Thread 3: AI-Native Operating Systems</legend>
-                                    <p><strong>Core Question:</strong> What are the architectural benefits of
-                                        integrating LLM inference at the OS level?</p>
-                                    <p><strong>Hypothesis:</strong> Native integration (C library, systemd daemon,
-                                        shared memory) reduces latency and enables novel interaction patterns impossible
-                                        with API-based AI.</p>
-                                    <p><strong>Venues:</strong> OSDI, ATC, HotOS</p>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>Thread 4: Neuro-Symbolic Math Computation</legend>
-                                    <p><strong>Core Question:</strong> Can hybrid systems (LLM + symbolic CAS)
-                                        outperform either alone?</p>
-                                    <p><strong>Venues:</strong> ICLR, AAAI, JAIR</p>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>📊 Research Combinations</legend>
+                                    <legend>🚀 Axiom Exclusives</legend>
                                     <table class="comparison-table">
                                         <tr>
-                                            <th>Combination</th>
-                                            <th>Paper Title Idea</th>
+                                            <th>Tool</th>
+                                            <th>Role</th>
+                                            <th>Description</th>
                                         </tr>
                                         <tr>
-                                            <td>Thread 1 + 2</td>
-                                            <td>"Teaching LLMs to Self-Verify via DSLs"</td>
+                                            <td><strong>Flux</strong></td>
+                                            <td>Native Shell</td>
+                                            <td>Bytecode compiler where math looks like math. Login shell
+                                                <code>/bin/flux</code>.</td>
                                         </tr>
                                         <tr>
-                                            <td>Thread 1 + 3</td>
-                                            <td>"Verifier Loops at OS Speed"</td>
+                                            <td><strong>Tenet</strong></td>
+                                            <td>Scheduler</td>
+                                            <td>DSL for modeling strategic interactions (Nash Equilibria).</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🧠 Infinite Precision (The Triad)</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>Library</th>
+                                            <th>Purpose</th>
                                         </tr>
                                         <tr>
-                                            <td>Thread 1 + 2 + 3</td>
-                                            <td>"Axiom: An AI-Native OS for Verified Computation"</td>
+                                            <td><strong>GMP</strong></td>
+                                            <td>Integers with millions of digits. Bedrock of Number Theory.</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>All Threads</strong></td>
-                                            <td><strong>Thesis: "Vertical Integration for Trustworthy AI"</strong></td>
+                                            <td><strong>MPFR</strong></td>
+                                            <td>Reliable floating-point with correct rounding.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>MPC</strong></td>
+                                            <td>Complex math ($a+bi$) without limits.</td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🏎️ Linear Algebra (The Engine)</legend>
+                                    <ul>
+                                        <li><strong>OpenBLAS</strong>: Compiled with <code>-march=native</code>.</li>
+                                        <li><strong>LAPACK</strong>: Linear systems solver.</li>
+                                        <li><strong>SuiteSparse</strong>: Sparse matrix optimization.</li>
+                                        <li><strong>Eigen</strong>: Zero-overhead C++ template library.</li>
+                                    </ul>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>🤖 Embedded AI</legend>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <td><strong>llama.cpp</strong></td>
+                                            <td>Inference engine rewritten for AVX-512.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Qwen 2.5 7B</strong></td>
+                                            <td>"The Math Whiz" - 75% MATH benchmark.</td>
                                         </tr>
                                     </table>
                                 </fieldset>
