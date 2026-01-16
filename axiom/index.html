@@ -455,12 +455,13 @@
 
                     <!-- Navigation Tabs -->
                     <menu role="tablist">
-                        <li role="tab" aria-selected="true"><a href="#overview"
+                        <li role="tab" aria-selected="true"><a href="javascript:void(0)"
                                 onclick="showTab('overview')">Overview</a></li>
-                        <li role="tab"><a href="#architecture" onclick="showTab('architecture')">Architecture</a></li>
-                        <li role="tab"><a href="#stack" onclick="showTab('stack')">Tech Stack</a></li>
-                        <li role="tab"><a href="#demo" onclick="showTab('demo')">Demo</a></li>
-                        <li role="tab"><a href="#download" onclick="showTab('download')">Download</a></li>
+                        <li role="tab"><a href="javascript:void(0)" onclick="showTab('architecture')">Architecture</a>
+                        </li>
+                        <li role="tab"><a href="javascript:void(0)" onclick="showTab('stack')">Tech Stack</a></li>
+                        <li role="tab"><a href="javascript:void(0)" onclick="showTab('demo')">Demo</a></li>
+                        <li role="tab"><a href="javascript:void(0)" onclick="showTab('download')">Download</a></li>
                     </menu>
 
                     <div class="window" role="tabpanel">
@@ -629,7 +630,9 @@
                                 <fieldset>
                                     <legend>System Boot</legend>
                                     <div class="demo-container crt-effect" style="background: black;">
-                                        <img src="axiom_boot_screen.png" alt="Axiom OS Boot Screen">
+                                        <iframe src="boot_sequence.html"
+                                            style="width: 100%; height: 100%; border: none; overflow: hidden;"
+                                            title="Axiom Boot Sequence"></iframe>
                                         <div class="demo-overlay">AXIOM OS v1.0</div>
                                     </div>
                                     <div style="text-align: center; margin-top: 8px;">
