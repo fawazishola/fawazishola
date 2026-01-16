@@ -12,22 +12,22 @@
     --neon-cyan: #00FFFF;
     --neon-cyan-glow: rgba(0, 255, 255, 0.4);
     --neon-cyan-dim: #00CCCC;
-    
+
     /* Deep blacks */
     --deep-black: #0a0a0f;
     --dark-surface: #0f0f18;
     --dark-border: #1a1a2e;
-    
+
     /* Supporting colors */
     --neon-pink: #FF00FF;
     --neon-purple: #8B00FF;
     --neon-blue: #0080FF;
-    
+
     /* Text */
     --text-primary: #E0E0E0;
     --text-secondary: #A0A0A0;
     --text-code: #00FFFF;
-    
+
     /* Syntax highlighting */
     --code-bg: #0a0a12;
     --code-keyword: #FF00FF;
@@ -74,7 +74,12 @@ body {
     background-color: var(--deep-black);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
     color: var(--neon-cyan);
     text-shadow: 0 0 10px var(--neon-cyan-glow);
@@ -176,15 +181,18 @@ code {
 }
 
 /* Syntax highlighting */
-.hljs-keyword, .hljs-selector-tag {
+.hljs-keyword,
+.hljs-selector-tag {
     color: var(--code-keyword) !important;
 }
 
-.hljs-string, .hljs-attr {
+.hljs-string,
+.hljs-attr {
     color: var(--code-string) !important;
 }
 
-.hljs-number, .hljs-literal {
+.hljs-number,
+.hljs-literal {
     color: var(--code-number) !important;
 }
 
@@ -193,7 +201,8 @@ code {
     font-style: italic;
 }
 
-.hljs-function, .hljs-title {
+.hljs-function,
+.hljs-title {
     color: var(--code-function) !important;
 }
 
@@ -337,11 +346,11 @@ blockquote p {
     h1 {
         font-size: 1.8rem;
     }
-    
+
     h2 {
         font-size: 1.4rem;
     }
-    
+
     pre {
         font-size: 0.85rem;
     }
@@ -377,6 +386,27 @@ blockquote p {
     margin: 1rem 0;
 }
 
+.note {
+    background: rgba(0, 255, 136, 0.1);
+    border-left: 4px solid var(--code-string);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.note strong {
+    color: var(--code-string);
+}
+
+.note::before,
+.note::after,
+.note i::before,
+.note .fa::before {
+    content: none !important;
+    display: none !important;
+    border: none !important;
+    width: 0 !important;
+}
+
 /* ============================================
    Print Styles
    ============================================ */
@@ -386,17 +416,22 @@ blockquote p {
         background: white;
         color: black;
     }
-    
-    h1, h2, h3, h4, h5, h6 {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         color: black;
         text-shadow: none;
     }
-    
+
     a {
         color: black;
         text-decoration: underline;
     }
-    
+
     pre {
         border: 1px solid #ccc;
         box-shadow: none;
