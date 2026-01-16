@@ -444,7 +444,7 @@
                 <div class="window-body">
                     <!-- Hero Section -->
                     <div class="hero-text">
-                        <h1>∫ AXIOM</h1>
+                        <h1>AXIOM</h1>
                         <p>A Math-Native Linux Workstation — Built From Scratch</p>
                         <div class="badges">
                             <span class="badge badge-blue">LFS 12.2</span>
@@ -712,7 +712,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>📊 Benchmark Results: Axiom vs Ubuntu 24.04</legend>
+                                    <legend>Benchmark Results: Axiom vs Ubuntu 24.04</legend>
                                     <p><em>Same hardware (Intel i7-10700, 32GB RAM) — Axiom compiled with
                                             <code>-march=native</code></em></p>
                                     <table class="comparison-table">
@@ -776,166 +776,7 @@
                                 </fieldset>
                             </div>
 
-                            <!-- Math Stack Tab -->
-                            <div id="blfs" class="tab-content">
-                                <h2>📦 The Complete Math Stack</h2>
-                                <p><em>PhD-grade computational environment — zero bloat, maximum performance</em></p>
 
-                                <fieldset>
-                                    <legend>🔧 Global Compiler Optimization</legend>
-                                    <p><strong>The secret weapon.</strong> All packages built with:</p>
-                                    <div class="code-block">export CFLAGS="-O3 -march=native -pipe"
-                                        export CXXFLAGS="${CFLAGS}"
-                                        export MAKEFLAGS="-j$(nproc)"</div>
-                                    <table class="comparison-table" style="margin-top: 12px;">
-                                        <tr>
-                                            <th>Flag</th>
-                                            <th>Purpose</th>
-                                        </tr>
-                                        <tr>
-                                            <td><code>-O3</code></td>
-                                            <td>Aggressive optimization</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>-march=native</code></td>
-                                            <td>Use CPU-specific instructions (AVX-512, SSE4.2)</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>-pipe</code></td>
-                                            <td>Speed up compilation</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>-j$(nproc)</code></td>
-                                            <td>Use all CPU cores</td>
-                                        </tr>
-                                    </table>
-                                </fieldset>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 1: Bloat-Free Graphical Foundation</h4>
-                                    <p><em>You need to see graphs and render PDFs, but you don't need desktop
-                                            animations</em></p>
-                                    <ul>
-                                        <li><strong>Xorg</strong> — Most compatible with legacy math tools</li>
-                                        <li><strong>i3 / sway</strong> — Tiling WM: code left, PDF right, terminal
-                                            bottom</li>
-                                        <li><strong>Alacritty / st</strong> — GPU-accelerated, instant startup</li>
-                                        <li><strong>JetBrains Mono</strong> — Ligatures for math/code</li>
-                                    </ul>
-                                </div>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 2: The "Infinite Precision" Triad</h4>
-                                    <p><em>For pure math: Number Theory, Cryptography, rigorous analysis</em></p>
-                                    <ul>
-                                        <li><strong>GMP</strong> — Arbitrary precision integers/rationals (calc π to 1M
-                                            digits)</li>
-                                        <li><strong>MPFR</strong> — Reliable floating-point with correct rounding</li>
-                                        <li><strong>MPC</strong> — Complex arbitrary precision</li>
-                                    </ul>
-                                </div>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 3: Heavy Metal Linear Algebra</h4>
-                                    <p><em>The engine behind NumPy, Octave, R, TensorFlow — if this is slow, EVERYTHING
-                                            is slow</em></p>
-                                    <ul>
-                                        <li><strong>OpenBLAS</strong> — Dense matrix ops (built with
-                                            <code>-march=native</code>)
-                                        </li>
-                                        <li><strong>LAPACK</strong> — Linear systems, eigenvalues, SVD</li>
-                                        <li><strong>SuiteSparse</strong> — Sparse matrices for graphs, FEM, physics</li>
-                                        <li><strong>FFTW</strong> — Fast Fourier Transforms with AVX/SSE</li>
-                                        <li><strong>Eigen</strong> — C++ template library (header-only)</li>
-                                        <li><strong>Armadillo</strong> — C++ MATLAB-like syntax</li>
-                                    </ul>
-                                </div>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 4-6: Solvers & Optimization</h4>
-                                    <ul>
-                                        <li><strong>GSL</strong> — General scientific computing</li>
-                                        <li><strong>SUNDIALS</strong> — DOE gold standard ODE/DAE solvers</li>
-                                        <li><strong>PETSc</strong> — Large-scale PDE solvers (scales to supercomputers!)
-                                        </li>
-                                        <li><strong>NLopt / Ipopt</strong> — Nonlinear optimization</li>
-                                    </ul>
-                                </div>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 7-8: High-Performance Data & Parallelism</h4>
-                                    <ul>
-                                        <li><strong>HDF5</strong> — Binary data format (handles terabytes instantly)
-                                        </li>
-                                        <li><strong>OpenMPI</strong> — Multi-core/cluster computing</li>
-                                        <li><strong>OpenMP</strong> — Loop parallelization (built into GCC)</li>
-                                        <li><strong>TBB</strong> — Intel Threading Building Blocks</li>
-                                    </ul>
-                                </div>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 9: Symbolic Math (Computer Algebra)</h4>
-                                    <ul>
-                                        <li><strong>Giac/Xcas</strong> — C++ symbolic engine (powers HP Prime)</li>
-                                        <li><strong>SymPy</strong> — Python symbolic math</li>
-                                        <li><strong>Maxima</strong> — Open-source Mathematica alternative</li>
-                                    </ul>
-                                </div>
-
-                                <div class="phase-card">
-                                    <h4>✓ Phase 10: Languages & Typesetting</h4>
-                                    <ul>
-                                        <li><strong>Python 3.12</strong> — With NumPy, SciPy, Pandas, Matplotlib</li>
-                                        <li><strong>Octave 9.1</strong> — MATLAB-compatible computing</li>
-                                        <li><strong>Julia 1.10</strong> — High-performance scientific computing</li>
-                                        <li><strong>R 4.3</strong> — Statistical computing</li>
-                                        <li><strong>TeX Live 2024</strong> — Complete LaTeX distribution</li>
-                                        <li><strong>Gnuplot / Matplotlib / ParaView</strong> — 2D/3D visualization</li>
-                                    </ul>
-                                </div>
-
-                                <fieldset>
-                                    <legend>🧠 Phase 11: The "Oracle" — Embedded AI</legend>
-                                    <p><em>A native LLM engine compiled with AVX2, integrated with Flux as a
-                                            Verifier-Optimizer loop</em></p>
-
-                                    <div class="architecture-diagram">
-                                        ┌────────────────────────────────────────────────────────────┐
-                                        │ AXIOM OS │
-                                        │ │
-                                        │ ┌──────────┐ ┌──────────────┐ ┌────────────────┐ │
-                                        │ │ User │───▶│ Qwen 7B │───▶│ Flux │ │
-                                        │ │ Query │ │ (Generator) │ │ (Verifier) │ │
-                                        │ └──────────┘ └──────┬───────┘ └───────┬────────┘ │
-                                        │ │ │ │
-                                        │ │◀── Penalty/Retry ──┘ │
-                                        │ │ (if invalid) │
-                                        │ ▼ │
-                                        │ ┌──────────────┐ │
-                                        │ │ Verified │ │
-                                        │ │ Output │ │
-                                        │ └──────────────┘ │
-                                        └────────────────────────────────────────────────────────────┘</div>
-
-                                    <table class="comparison-table" style="margin-top: 12px;">
-                                        <tr>
-                                            <th>RAM</th>
-                                            <th>Model</th>
-                                            <th>Free for Verifier</th>
-                                        </tr>
-                                        <tr>
-                                            <td>16GB</td>
-                                            <td>Qwen 2.5 7B (Q4_K_M) ~5GB</td>
-                                            <td>~10GB ✅</td>
-                                        </tr>
-                                    </table>
-
-                                    <p style="margin-top: 12px;"><strong>The Core Insight:</strong> Use Flux as a
-                                        <strong>Game Theory referee</strong> that validates LLM outputs. Accuracy comes
-                                        from <strong>architecture</strong>, not model size.
-                                    </p>
-                                </fieldset>
-                            </div>
 
                             <!-- Architecture Tab -->
                             <div id="architecture" class="tab-content">
@@ -1286,7 +1127,7 @@
                 Reboot System
             </div>
             <div class="separator"></div>
-            <div class="start-item" onclick="alert('Shutting down...'); window.close();">
+            <div class="start-item" onclick="localStorage.removeItem('axiom_session'); window.location.reload();">
                 Shut Down
             </div>
         </div>
@@ -1346,6 +1187,7 @@
         function completeLogin() {
             const pwd = document.getElementById('login-password').value;
             if (pwd === 'axiom') {
+                localStorage.setItem('axiom_session', 'active'); // Save session
                 document.getElementById('login-screen').style.display = 'none';
                 launchApp('axiom-window');
             } else {
@@ -1528,6 +1370,15 @@
 
         // Initialize Draggable Logic on Load
         // (Event listeners added above)
+
+        // Check for active session on boot
+        window.addEventListener('load', () => {
+            if (localStorage.getItem('axiom_session') === 'active') {
+                document.getElementById('power-screen').style.display = 'none';
+                document.getElementById('login-screen').style.display = 'none';
+                launchApp('axiom-window');
+            }
+        });
     </script>
 </body>
 
